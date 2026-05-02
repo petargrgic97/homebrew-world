@@ -317,6 +317,16 @@
   line-height: 1.75;
   max-width: none;
 }
+.prose-grimoire p {
+  margin-bottom: 1.1em;
+}
+.prose-grimoire p:last-child {
+  margin-bottom: 0;
+}
+.prose-grimoire ul,
+.prose-grimoire ol {
+  margin-bottom: 1.1em;
+}
 .prose-grimoire h1,
 .prose-grimoire h2,
 .prose-grimoire h3,
