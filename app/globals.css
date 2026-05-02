@@ -177,7 +177,7 @@
 
 @layer components {
   .page-enter {
-    animation: pageEnter 0.22s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation: pageEnter 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
   @keyframes pageEnter {
     from {
