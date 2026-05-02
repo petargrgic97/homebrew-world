@@ -25,6 +25,7 @@ export default function EditEvent({
     await mutate(['events']);
     if (event?.locationId) await mutate(['events-by-location', event.locationId]);
     if (event?.sessionId) await mutate(['events-by-session', event.sessionId]);
+    for (const nid of event?.npcIds ?? []) await mutate(['events-by-npc', nid]);
     router.back();
   }
 
@@ -44,6 +45,7 @@ export default function EditEvent({
         onSubmit={async (input) => {
           const prevLocationId = event.locationId;
           const prevSessionId = event.sessionId;
+          const prevNpcIds = event.npcIds ?? [];
           await updateEvent(db, id, input);
           await mutate(['event', id]);
           await mutate(['events']);
@@ -53,6 +55,8 @@ export default function EditEvent({
           for (const sid of [prevSessionId, input.sessionId]) {
             if (sid) await mutate(['events-by-session', sid]);
           }
+          const allNpcIds = new Set([...prevNpcIds, ...input.npcIds]);
+          for (const nid of allNpcIds) await mutate(['events-by-npc', nid]);
           router.back();
         }}
         onCancel={() => router.back()}

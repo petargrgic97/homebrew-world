@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation';
 import { mutate } from 'swr';
 import { useNpc } from '@/lib/hooks/useNpc';
 import { useLocation } from '@/lib/hooks/useLocation';
+import { useEventsByNpc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
+import { EventTimeline } from '@/components/events/EventTimeline';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { deleteNpc } from '@/lib/firestore/npcs';
@@ -26,6 +28,7 @@ export default function DMNpcDetail({
   const { id } = use(params);
   const { data: npc } = useNpc(id);
   const { data: location } = useLocation(npc?.locationId ?? '');
+  const { data: events } = useEventsByNpc(id);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
@@ -95,6 +98,23 @@ export default function DMNpcDetail({
       </header>
       <Ornament className="max-w-md mx-auto" />
       <Markdown dropcap>{npc.description}</Markdown>
+
+      <section>
+        <div className="flex items-center justify-between mb-4 gap-3">
+          <h2 className="section-title flex items-center gap-3 flex-1">
+            <span>Where They Appear</span>
+            <span className="h-px flex-1 bg-gold-dim/30" />
+          </h2>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/dm/events/new?npcId=${id}`}>+ Add event</Link>
+          </Button>
+        </div>
+        {events && events.length > 0 ? (
+          <EventTimeline events={events} dmEditable />
+        ) : (
+          <div className="text-sm text-vellum-dim italic">No events involve this NPC yet.</div>
+        )}
+      </section>
 
       <ConfirmDialog
         open={confirmOpen}

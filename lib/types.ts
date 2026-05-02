@@ -55,6 +55,7 @@ export interface CampaignEvent {
   description: string;
   locationId: EntityId | null;
   sessionId: EntityId | null;
+  npcIds: EntityId[];
   occurredAt: string;
   createdAt: Timestamp;
   updatedAt: Timestamp;

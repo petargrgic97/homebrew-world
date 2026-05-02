@@ -4,8 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useNpc } from '@/lib/hooks/useNpc';
 import { useLocation } from '@/lib/hooks/useLocation';
+import { useEventsByNpc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
+import { EventTimeline } from '@/components/events/EventTimeline';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -20,6 +22,7 @@ export default function NpcDetail({
   const { id } = use(params);
   const { data: npc, isLoading } = useNpc(id);
   const { data: location } = useLocation(npc?.locationId ?? '');
+  const { data: events } = useEventsByNpc(id);
 
   if (isLoading) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
   if (!npc) return <div className="p-10 text-vellum-dim italic">NPC not found.</div>;
@@ -69,6 +72,16 @@ export default function NpcDetail({
       </header>
       <Ornament className="max-w-md mx-auto" />
       <Markdown dropcap>{npc.description}</Markdown>
+
+      {events && events.length > 0 && (
+        <section>
+          <h2 className="section-title mb-4 flex items-center gap-3">
+            <span>Where They Appear</span>
+            <span className="h-px flex-1 bg-gold-dim/30" />
+          </h2>
+          <EventTimeline events={events} />
+        </section>
+      )}
     </article>
   );
 }
