@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth/AuthProvider";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 const display = Cinzel({
   subsets: ["latin"],
@@ -47,7 +48,9 @@ export default function RootLayout({
         <AuthProvider>
           <div className="min-h-screen flex flex-col md:flex-row">
             <Sidebar />
-            <main className="flex-1 pb-20 md:pb-0 relative">{children}</main>
+            <main className="flex-1 pb-20 md:pb-0 relative">
+              <PageTransition>{children}</PageTransition>
+            </main>
             <MobileNav />
           </div>
         </AuthProvider>
