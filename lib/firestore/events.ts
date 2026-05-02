@@ -13,13 +13,13 @@ export async function listEvents(db: Firestore): Promise<CampaignEvent[]> {
 }
 
 export async function listEventsByLocation(db: Firestore, locationId: string): Promise<CampaignEvent[]> {
-  const snap = await getDocs(query(col(db), where('locationId', '==', locationId), orderBy('occurredAt', 'desc')));
-  return snap.docs.map(d => d.data());
+  const snap = await getDocs(query(col(db), where('locationId', '==', locationId)));
+  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
 }
 
 export async function listEventsBySession(db: Firestore, sessionId: string): Promise<CampaignEvent[]> {
-  const snap = await getDocs(query(col(db), where('sessionId', '==', sessionId), orderBy('occurredAt', 'desc')));
-  return snap.docs.map(d => d.data());
+  const snap = await getDocs(query(col(db), where('sessionId', '==', sessionId)));
+  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
 }
 
 export async function getEvent(db: Firestore, id: string): Promise<CampaignEvent | null> {

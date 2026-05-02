@@ -13,8 +13,8 @@ export async function listNpcs(db: Firestore): Promise<Npc[]> {
 }
 
 export async function listNpcsByLocation(db: Firestore, locationId: string): Promise<Npc[]> {
-  const snap = await getDocs(query(col(db), where('locationId', '==', locationId), orderBy('name')));
-  return snap.docs.map(d => d.data());
+  const snap = await getDocs(query(col(db), where('locationId', '==', locationId)));
+  return snap.docs.map(d => d.data()).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export async function getNpc(db: Firestore, id: string): Promise<Npc | null> {
