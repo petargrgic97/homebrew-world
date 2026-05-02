@@ -43,6 +43,9 @@ yarn-error.log*
 .firebase
 firebase-debug.log
 
+# personal reference notes (campaign-specific)
+docs/miro-import.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

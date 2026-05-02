@@ -26,7 +26,7 @@ export default function PcDetail({
   return (
     <article className="px-6 md:px-10 py-10 max-w-3xl mx-auto space-y-8">
       <header className="flex flex-col items-center text-center space-y-4">
-        <div className="relative">
+        <div>
           {pc.portraitUrl ? (
             <Image
               src={pc.portraitUrl}
@@ -38,11 +38,6 @@ export default function PcDetail({
           ) : (
             <div className="w-44 h-44 rounded-full bg-linear-to-br from-surface-elev to-ink-deep ring-2 ring-gold-dim/30 flex items-center justify-center">
               <span className="display text-gold-dim/30 text-6xl">✦</span>
-            </div>
-          )}
-          {pc.level > 0 && (
-            <div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-ink-deep border border-gold flex items-center justify-center display-decorative text-gold text-base font-bold leading-none">
-              lv {pc.level}
             </div>
           )}
         </div>

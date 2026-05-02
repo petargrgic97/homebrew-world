@@ -23,7 +23,6 @@ export interface Pc {
   status: NpcStatus;
   characterClass: string;
   race: string;
-  level: number;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }

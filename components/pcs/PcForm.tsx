@@ -26,7 +26,6 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
   const [status, setStatus] = useState<NpcStatus>(initial?.status ?? 'alive');
   const [characterClass, setCharacterClass] = useState(initial?.characterClass ?? '');
   const [race, setRace] = useState(initial?.race ?? '');
-  const [level, setLevel] = useState(initial?.level ?? 1);
   const [busy, setBusy] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -35,7 +34,7 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
     try {
       await onSubmit({
         name, playerName, description, portraitUrl,
-        status, characterClass, race, level,
+        status, characterClass, race,
       });
     } finally {
       setBusy(false);
@@ -60,7 +59,7 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="race">Race</Label>
           <Input
@@ -77,16 +76,6 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
             value={characterClass}
             onChange={e => setCharacterClass(e.target.value)}
             placeholder="Wizard"
-          />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="level">Level</Label>
-          <Input
-            id="level"
-            type="number"
-            min={1}
-            value={level}
-            onChange={e => setLevel(Number(e.target.value))}
           />
         </div>
       </div>

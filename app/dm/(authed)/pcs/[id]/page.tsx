@@ -42,7 +42,7 @@ export default function DMPcDetail({
       <header className="space-y-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col sm:flex-row gap-6 items-start flex-1 min-w-0">
-            <div className="shrink-0 relative">
+            <div className="shrink-0">
               {pc.portraitUrl ? (
                 <Image
                   src={pc.portraitUrl}
@@ -54,11 +54,6 @@ export default function DMPcDetail({
               ) : (
                 <div className="w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-linear-to-br from-surface-elev to-ink-deep ring-2 ring-gold-dim/30 flex items-center justify-center">
                   <span className="display text-gold-dim/30 text-4xl">✦</span>
-                </div>
-              )}
-              {pc.level > 0 && (
-                <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-ink-deep border border-gold flex items-center justify-center display-decorative text-gold text-sm font-bold leading-none">
-                  {pc.level}
                 </div>
               )}
             </div>
