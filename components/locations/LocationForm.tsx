@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { MarkdownEditor } from '@/components/shared/MarkdownEditor';
+import { LinkInserter } from '@/components/shared/LinkInserter';
 import { ImageUpload } from '@/components/shared/ImageUpload';
 import type { Location, WriteInput } from '@/lib/types';
 
@@ -49,8 +50,11 @@ export function LocationForm({ initial, onSubmit, onCancel }: Props) {
         <Label>Image</Label>
         <ImageUpload folder="location-images" initialUrl={imageUrl} onUploaded={setImageUrl} />
       </div>
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <Label>Description (markdown)</Label>
+        <LinkInserter
+          onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
+        />
         <MarkdownEditor value={description} onChange={setDescription} />
       </div>
       <div className="flex gap-2">

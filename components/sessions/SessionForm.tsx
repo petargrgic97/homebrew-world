@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { MarkdownEditor } from '@/components/shared/MarkdownEditor';
+import { LinkInserter } from '@/components/shared/LinkInserter';
 import type { Session, WriteInput } from '@/lib/types';
 
 interface Props {
@@ -71,8 +72,11 @@ export function SessionForm({ initial, onSubmit, onCancel }: Props) {
           placeholder="e.g. The Fountain Incident"
         />
       </div>
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <Label>Recap (markdown)</Label>
+        <LinkInserter
+          onInsert={(md) => setRecap(prev => (prev ? `${prev} ${md}` : md))}
+        />
         <MarkdownEditor value={recap} onChange={setRecap} height={400} />
       </div>
       <div className="flex gap-2">

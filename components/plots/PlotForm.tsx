@@ -7,6 +7,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
 import { MarkdownEditor } from '@/components/shared/MarkdownEditor';
+import { LinkInserter } from '@/components/shared/LinkInserter';
 import { useNpcs } from '@/lib/hooks/useNpcs';
 import { usePcs } from '@/lib/hooks/usePcs';
 import { useLocations } from '@/lib/hooks/useLocations';
@@ -122,8 +123,11 @@ export function PlotForm({ initial, onSubmit, onCancel }: Props) {
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <Label>Description (markdown)</Label>
+        <LinkInserter
+          onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
+        />
         <MarkdownEditor value={description} onChange={setDescription} />
       </div>
 
