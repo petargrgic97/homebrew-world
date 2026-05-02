@@ -5,8 +5,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { mutate } from 'swr';
 import { usePc } from '@/lib/hooks/usePc';
+import { useEventsByPc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
+import { EventTimeline } from '@/components/events/EventTimeline';
 import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { deletePc } from '@/lib/firestore/pcs';
@@ -24,6 +26,7 @@ export default function DMPcDetail({
 }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data: pc } = usePc(id);
+  const { data: events } = useEventsByPc(id);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
@@ -91,6 +94,23 @@ export default function DMPcDetail({
       </header>
       <Ornament className="max-w-md mx-auto" />
       <Markdown dropcap>{pc.description}</Markdown>
+
+      <section>
+        <div className="flex items-center justify-between mb-4 gap-3">
+          <h2 className="section-title flex items-center gap-3 flex-1">
+            <span>Their Deeds</span>
+            <span className="h-px flex-1 bg-gold-dim/30" />
+          </h2>
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/dm/events/new?pcId=${id}`}>+ Add event</Link>
+          </Button>
+        </div>
+        {events && events.length > 0 ? (
+          <EventTimeline events={events} dmEditable />
+        ) : (
+          <div className="text-sm text-vellum-dim italic">No events involve this hero yet.</div>
+        )}
+      </section>
 
       <ConfirmDialog
         open={confirmOpen}

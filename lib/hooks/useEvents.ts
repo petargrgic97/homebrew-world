@@ -1,7 +1,7 @@
 'use client';
 import useSWR from 'swr';
 import { db } from '@/lib/firebase';
-import { listEvents, listEventsByLocation, listEventsBySession, listEventsByNpc } from '@/lib/firestore/events';
+import { listEvents, listEventsByLocation, listEventsBySession, listEventsByNpc, listEventsByPc } from '@/lib/firestore/events';
 
 export function useEvents() {
   return useSWR(['events'], () => listEvents(db), { revalidateOnFocus: true });
@@ -27,6 +27,14 @@ export function useEventsByNpc(npcId: string) {
   return useSWR(
     npcId ? ['events-by-npc', npcId] : null,
     () => listEventsByNpc(db, npcId),
+    { revalidateOnFocus: true },
+  );
+}
+
+export function useEventsByPc(pcId: string) {
+  return useSWR(
+    pcId ? ['events-by-pc', pcId] : null,
+    () => listEventsByPc(db, pcId),
     { revalidateOnFocus: true },
   );
 }

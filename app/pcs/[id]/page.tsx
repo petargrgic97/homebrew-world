@@ -2,8 +2,10 @@
 import { use } from 'react';
 import Image from 'next/image';
 import { usePc } from '@/lib/hooks/usePc';
+import { useEventsByPc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
+import { EventTimeline } from '@/components/events/EventTimeline';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -17,6 +19,7 @@ export default function PcDetail({
 }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data: pc, isLoading } = usePc(id);
+  const { data: events } = useEventsByPc(id);
 
   if (isLoading) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
   if (!pc) return <div className="p-10 text-vellum-dim italic">Hero not found.</div>;
@@ -66,6 +69,16 @@ export default function PcDetail({
       </header>
 
       <Markdown dropcap>{pc.description}</Markdown>
+
+      {events && events.length > 0 && (
+        <section>
+          <h2 className="section-title mb-4 flex items-center gap-3">
+            <span>Their Deeds</span>
+            <span className="h-px flex-1 bg-gold-dim/30" />
+          </h2>
+          <EventTimeline events={events} />
+        </section>
+      )}
     </article>
   );
 }

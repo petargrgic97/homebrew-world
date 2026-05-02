@@ -13,18 +13,25 @@ function NewEventInner() {
   const locationId = params.get('locationId');
   const sessionId = params.get('sessionId');
   const npcId = params.get('npcId');
+  const pcId = params.get('pcId');
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
       <PageHeader eyebrow="Record what came to pass" title="New Event" />
       <EventForm
-        initial={{ locationId, sessionId, npcIds: npcId ? [npcId] : [] }}
+        initial={{
+          locationId,
+          sessionId,
+          npcIds: npcId ? [npcId] : [],
+          pcIds: pcId ? [pcId] : [],
+        }}
         onSubmit={async (input) => {
           await createEvent(db, input);
           await mutate(['events']);
           if (input.locationId) await mutate(['events-by-location', input.locationId]);
           if (input.sessionId) await mutate(['events-by-session', input.sessionId]);
           for (const id of input.npcIds) await mutate(['events-by-npc', id]);
+          for (const id of input.pcIds) await mutate(['events-by-pc', id]);
           router.back();
         }}
         onCancel={() => router.back()}

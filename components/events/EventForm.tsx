@@ -11,12 +11,14 @@ import { LinkInserter } from '@/components/shared/LinkInserter';
 import { useLocations } from '@/lib/hooks/useLocations';
 import { useSessions } from '@/lib/hooks/useSessions';
 import { useNpcs } from '@/lib/hooks/useNpcs';
+import { usePcs } from '@/lib/hooks/usePcs';
 import type { CampaignEvent, WriteInput } from '@/lib/types';
 
 interface InitialEventValues {
   locationId?: string | null;
   sessionId?: string | null;
   npcIds?: string[];
+  pcIds?: string[];
 }
 
 interface Props {
@@ -39,6 +41,7 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
   const { data: locations = [] } = useLocations();
   const { data: sessions = [] } = useSessions();
   const { data: npcs = [] } = useNpcs();
+  const { data: pcs = [] } = usePcs();
 
   const full = isFullEvent(initial) ? initial : null;
 
@@ -51,11 +54,15 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
     (full?.sessionId ?? initial?.sessionId) ?? NO_LINK,
   );
   const [npcIds, setNpcIds] = useState<string[]>(full?.npcIds ?? initial?.npcIds ?? []);
+  const [pcIds, setPcIds] = useState<string[]>(full?.pcIds ?? initial?.pcIds ?? []);
   const [occurredAt, setOccurredAt] = useState(full?.occurredAt ?? todayIso());
   const [busy, setBusy] = useState(false);
 
   function toggleNpc(id: string) {
     setNpcIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  }
+  function togglePc(id: string) {
+    setPcIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -68,6 +75,7 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
         locationId: locationId === NO_LINK ? null : locationId,
         sessionId: sessionId === NO_LINK ? null : sessionId,
         npcIds,
+        pcIds,
         occurredAt,
       });
     } finally {
@@ -127,6 +135,27 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
             </SelectContent>
           </Select>
         </div>
+      </div>
+
+      <div className="space-y-1.5">
+        <Label>Heroes involved (PCs)</Label>
+        {pcs.length === 0 ? (
+          <div className="text-sm text-vellum-dim italic">No party members yet.</div>
+        ) : (
+          <div className="grid sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto border border-border rounded-sm p-2 bg-ink-deep/30">
+            {pcs.map(p => (
+              <label key={p.id} className="flex items-center gap-2 text-sm cursor-pointer hover:bg-surface/40 rounded px-1 py-0.5">
+                <input
+                  type="checkbox"
+                  checked={pcIds.includes(p.id)}
+                  onChange={() => togglePc(p.id)}
+                  className="accent-gold"
+                />
+                <span className="text-vellum">{p.name}</span>
+              </label>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="space-y-1.5">

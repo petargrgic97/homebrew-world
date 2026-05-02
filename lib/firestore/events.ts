@@ -27,6 +27,11 @@ export async function listEventsByNpc(db: Firestore, npcId: string): Promise<Cam
   return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
 }
 
+export async function listEventsByPc(db: Firestore, pcId: string): Promise<CampaignEvent[]> {
+  const snap = await getDocs(query(col(db), where('pcIds', 'array-contains', pcId)));
+  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+}
+
 export async function getEvent(db: Firestore, id: string): Promise<CampaignEvent | null> {
   const snap = await getDoc(doc(db, 'events', id).withConverter(eventConverter));
   return snap.exists() ? snap.data() : null;
