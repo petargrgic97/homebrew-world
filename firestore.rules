@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function dmUids() {
+      return ['mnj1orLWAKOcILM4V5O1Sne2sNq1'];
+    }
+    function isDM() {
+      return request.auth != null && request.auth.uid in dmUids();
+    }
+
+    match /plots/{doc} {
+      allow read, write: if isDM();
+    }
+
+    match /{collection}/{doc} {
+      allow read: if collection in ['locations','npcs','pcs','sessions','events','maps'];
+      allow write: if isDM() && collection in ['locations','npcs','pcs','sessions','events','maps'];
+    }
+  }
+}

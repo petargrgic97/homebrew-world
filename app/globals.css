@@ -1,0 +1,408 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Fantasy custom tokens */
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-vellum: var(--vellum);
+  --color-vellum-dim: var(--vellum-dim);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
+  --color-blood: var(--blood);
+  --color-blood-bright: var(--blood-bright);
+  --color-surface: var(--surface);
+  --color-surface-elev: var(--surface-elev);
+}
+
+:root {
+  /* Fantasy palette — dark grimoire */
+  --ink: oklch(0.165 0.014 60);
+  --ink-deep: oklch(0.11 0.012 60);
+  --surface: oklch(0.215 0.016 60);
+  --surface-elev: oklch(0.27 0.020 65);
+  --vellum: oklch(0.93 0.028 82);
+  --vellum-dim: oklch(0.72 0.024 80);
+  --gold: oklch(0.76 0.105 82);
+  --gold-bright: oklch(0.88 0.13 84);
+  --gold-dim: oklch(0.50 0.06 80);
+  --blood: oklch(0.46 0.135 25);
+  --blood-bright: oklch(0.56 0.165 25);
+
+  /* shadcn token overrides → fantasy mapping */
+  --background: var(--ink);
+  --foreground: var(--vellum);
+  --card: var(--surface);
+  --card-foreground: var(--vellum);
+  --popover: oklch(0.20 0.016 60);
+  --popover-foreground: var(--vellum);
+  --primary: var(--gold);
+  --primary-foreground: var(--ink-deep);
+  --secondary: var(--surface-elev);
+  --secondary-foreground: var(--vellum);
+  --muted: var(--surface-elev);
+  --muted-foreground: var(--vellum-dim);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink-deep);
+  --destructive: var(--blood);
+  --border: oklch(0.34 0.018 70 / 60%);
+  --input: oklch(0.28 0.018 65);
+  --ring: var(--gold);
+  --chart-1: var(--gold);
+  --chart-2: var(--blood);
+  --chart-3: oklch(0.6 0.06 200);
+  --chart-4: oklch(0.65 0.10 145);
+  --chart-5: oklch(0.7 0.12 75);
+  --radius: 0.25rem;
+  --sidebar: var(--ink-deep);
+  --sidebar-foreground: var(--vellum);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: var(--ink-deep);
+  --sidebar-accent: var(--surface);
+  --sidebar-accent-foreground: var(--vellum);
+  --sidebar-border: oklch(0.30 0.018 70 / 60%);
+  --sidebar-ring: var(--gold);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--font-body, ui-serif, Georgia, serif);
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: var(--ink);
+    background-image:
+      radial-gradient(ellipse at top left, oklch(0.21 0.024 65) 0%, transparent 55%),
+      radial-gradient(ellipse at bottom right, oklch(0.18 0.024 30) 0%, transparent 60%),
+      linear-gradient(to bottom, var(--ink-deep) 0%, var(--ink) 100%);
+    background-attachment: fixed;
+    font-feature-settings: "kern", "liga", "onum";
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0 0.82 0 0 0 0.06 0'/></filter><rect width='280' height='280' filter='url(%23n)'/></svg>");
+    opacity: 0.65;
+    mix-blend-mode: overlay;
+  }
+  /* Place page chrome above noise */
+  body > * {
+    position: relative;
+    z-index: 2;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display, ui-serif, Georgia, serif);
+    letter-spacing: 0.015em;
+    color: var(--vellum);
+  }
+  h1 {
+    font-weight: 600;
+  }
+  ::selection {
+    background-color: var(--gold);
+    color: var(--ink-deep);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink-deep);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.35 0.02 70);
+    border-radius: 6px;
+    border: 2px solid var(--ink-deep);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-dim);
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display, ui-serif, Georgia, serif);
+    letter-spacing: 0.04em;
+  }
+  .display-decorative {
+    font-family: var(--font-display-decorative, var(--font-display));
+    letter-spacing: 0.03em;
+  }
+  .font-script {
+    font-family: var(--font-script, ui-serif, Georgia, serif);
+  }
+
+  .panel {
+    background-color: var(--surface);
+    border: 1px solid oklch(0.32 0.018 70 / 70%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 4%),
+      0 1px 2px oklch(0 0 0 / 50%),
+      0 8px 24px -12px oklch(0 0 0 / 60%);
+  }
+  .panel-bordered {
+    position: relative;
+  }
+  .panel-bordered::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid oklch(0.5 0.06 80 / 25%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Card hover treatment: warm glow + subtle lift */
+  .card-hover {
+    transition: transform 200ms ease, box-shadow 240ms ease, border-color 200ms ease;
+    will-change: transform;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    border-color: oklch(0.55 0.08 82 / 60%);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 6%),
+      0 0 0 1px oklch(0.55 0.08 82 / 30%),
+      0 6px 12px -2px oklch(0 0 0 / 55%),
+      0 18px 38px -16px oklch(0.55 0.08 82 / 25%);
+  }
+
+  /* Wax seal-style status badge */
+  .seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1;
+    border: 1px solid currentColor;
+    background-color: oklch(0 0 0 / 25%);
+    box-shadow:
+      inset 0 0 8px oklch(0 0 0 / 40%),
+      inset 0 1px 0 oklch(1 0 0 / 8%);
+  }
+
+  /* Drop cap (opt-in via .dropcap on container) */
+  .prose-grimoire.dropcap > p:first-of-type::first-letter {
+    font-family: var(--font-display-decorative, var(--font-display));
+    font-weight: 700;
+    float: left;
+    font-size: 3.4em;
+    line-height: 0.9;
+    padding: 0.05em 0.15em 0 0;
+    margin-right: 0.05em;
+    color: var(--gold);
+    text-shadow: 0 1px 0 oklch(0 0 0 / 70%);
+  }
+
+  /* Page heading with ornamental flank lines */
+  .page-title {
+    font-family: var(--font-display, ui-serif, Georgia, serif);
+    font-weight: 600;
+    color: var(--vellum);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  }
+
+  /* Underline ornament for section heads */
+  .section-title {
+    font-family: var(--font-display, ui-serif, Georgia, serif);
+    color: var(--vellum);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* Sidebar nav items */
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.55rem 0.9rem 0.55rem 1.1rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.74rem;
+    color: var(--vellum-dim);
+    transition: color 180ms ease, background 180ms ease;
+  }
+  .nav-link:hover {
+    color: var(--vellum);
+    background: oklch(1 0 0 / 3%);
+  }
+  .nav-link.active {
+    color: var(--gold);
+    background: oklch(1 0 0 / 4%);
+  }
+  .nav-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--gold);
+    box-shadow: 0 0 8px oklch(0.76 0.105 82 / 60%);
+  }
+}
+
+/* Prose overrides for markdown rendered on dark theme */
+.prose-grimoire {
+  color: var(--vellum);
+  font-family: var(--font-body, ui-serif, Georgia, serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: none;
+}
+.prose-grimoire h1,
+.prose-grimoire h2,
+.prose-grimoire h3,
+.prose-grimoire h4 {
+  font-family: var(--font-display);
+  letter-spacing: 0.025em;
+  color: var(--vellum);
+}
+.prose-grimoire h2 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid oklch(0.5 0.06 80 / 30%);
+  padding-bottom: 0.35rem;
+}
+.prose-grimoire h3 {
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+}
+.prose-grimoire a {
+  color: var(--gold-bright);
+  text-decoration: underline;
+  text-decoration-color: var(--gold-dim);
+  text-underline-offset: 3px;
+}
+.prose-grimoire a:hover {
+  color: var(--gold);
+}
+.prose-grimoire strong {
+  color: var(--vellum);
+  font-weight: 600;
+}
+.prose-grimoire em {
+  color: oklch(0.85 0.05 80);
+}
+.prose-grimoire blockquote {
+  border-left: 2px solid var(--gold);
+  background: oklch(0 0 0 / 25%);
+  padding: 0.6rem 1rem;
+  margin: 1.25rem 0;
+  font-style: italic;
+  color: var(--vellum-dim);
+}
+.prose-grimoire hr {
+  border: none;
+  text-align: center;
+  margin: 2rem 0;
+}
+.prose-grimoire hr::before {
+  content: '❦';
+  color: var(--gold-dim);
+  font-size: 1.1rem;
+  letter-spacing: 0.5em;
+}
+.prose-grimoire ul {
+  list-style: none;
+  padding-left: 1.4rem;
+}
+.prose-grimoire ul > li {
+  position: relative;
+}
+.prose-grimoire ul > li::before {
+  content: '◆';
+  position: absolute;
+  left: -1.25rem;
+  color: var(--gold-dim);
+  font-size: 0.7em;
+  top: 0.55em;
+}
+.prose-grimoire code {
+  font-family: var(--font-mono);
+  background: oklch(0 0 0 / 35%);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: var(--gold-bright);
+}
+.prose-grimoire pre {
+  background: oklch(0 0 0 / 50%);
+  border: 1px solid oklch(0.32 0.018 70 / 60%);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+.prose-grimoire pre code {
+  background: transparent;
+  padding: 0;
+  color: var(--vellum);
+}
