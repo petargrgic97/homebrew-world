@@ -7,6 +7,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
 import { MarkdownEditor } from '@/components/shared/MarkdownEditor';
+import { LinkInserter } from '@/components/shared/LinkInserter';
 import { useLocations } from '@/lib/hooks/useLocations';
 import { useSessions } from '@/lib/hooks/useSessions';
 import type { CampaignEvent, WriteInput } from '@/lib/types';
@@ -119,8 +120,11 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
         </div>
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <Label>Description (markdown)</Label>
+        <LinkInserter
+          onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
+        />
         <MarkdownEditor value={description} onChange={setDescription} />
       </div>
 
