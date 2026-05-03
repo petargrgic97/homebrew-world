@@ -7,29 +7,38 @@ import type { CampaignEvent, WriteInput } from '@/lib/types';
 
 const col = (db: Firestore) => collection(db, 'events').withConverter(eventConverter);
 
+function compareByCreated(a: CampaignEvent, b: CampaignEvent): number {
+  const aSec = a.createdAt?.seconds ?? 0;
+  const bSec = b.createdAt?.seconds ?? 0;
+  if (aSec !== bSec) return aSec - bSec;
+  const aNs = a.createdAt?.nanoseconds ?? 0;
+  const bNs = b.createdAt?.nanoseconds ?? 0;
+  return aNs - bNs;
+}
+
 export async function listEvents(db: Firestore): Promise<CampaignEvent[]> {
-  const snap = await getDocs(query(col(db), orderBy('occurredAt', 'desc')));
+  const snap = await getDocs(query(col(db), orderBy('createdAt', 'asc')));
   return snap.docs.map(d => d.data());
 }
 
 export async function listEventsByLocation(db: Firestore, locationId: string): Promise<CampaignEvent[]> {
   const snap = await getDocs(query(col(db), where('locationId', '==', locationId)));
-  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  return snap.docs.map(d => d.data()).sort(compareByCreated);
 }
 
 export async function listEventsBySession(db: Firestore, sessionId: string): Promise<CampaignEvent[]> {
   const snap = await getDocs(query(col(db), where('sessionId', '==', sessionId)));
-  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  return snap.docs.map(d => d.data()).sort(compareByCreated);
 }
 
 export async function listEventsByNpc(db: Firestore, npcId: string): Promise<CampaignEvent[]> {
   const snap = await getDocs(query(col(db), where('npcIds', 'array-contains', npcId)));
-  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  return snap.docs.map(d => d.data()).sort(compareByCreated);
 }
 
 export async function listEventsByPc(db: Firestore, pcId: string): Promise<CampaignEvent[]> {
   const snap = await getDocs(query(col(db), where('pcIds', 'array-contains', pcId)));
-  return snap.docs.map(d => d.data()).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  return snap.docs.map(d => d.data()).sort(compareByCreated);
 }
 
 export async function getEvent(db: Firestore, id: string): Promise<CampaignEvent | null> {

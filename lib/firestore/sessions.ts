@@ -8,7 +8,7 @@ import type { Session, WriteInput } from '@/lib/types';
 const col = (db: Firestore) => collection(db, 'sessions').withConverter(sessionConverter);
 
 export async function listSessions(db: Firestore): Promise<Session[]> {
-  const snap = await getDocs(query(col(db), orderBy('number', 'desc')));
+  const snap = await getDocs(query(col(db), orderBy('createdAt', 'asc')));
   return snap.docs.map(d => d.data());
 }
 
