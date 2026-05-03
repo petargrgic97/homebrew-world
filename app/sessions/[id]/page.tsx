@@ -20,7 +20,7 @@ export default function SessionDetail({
     <article className="px-6 md:px-10 py-10 max-w-3xl mx-auto space-y-8">
       <header className="text-center space-y-2">
         <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-          ✦ session {session.number} · {session.date} ✦
+          ✦ session {session.number}{session.date ? ` · ${session.date}` : ''} ✦
         </div>
         <h1 className="display-decorative text-4xl md:text-5xl text-gold leading-tight">
           {session.title || `Session ${session.number}`}

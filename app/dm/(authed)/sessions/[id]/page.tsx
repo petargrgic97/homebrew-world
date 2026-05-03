@@ -36,7 +36,7 @@ export default function DMSessionDetail({
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-              ✦ session {session.number} · {session.date} ✦
+              ✦ session {session.number}{session.date ? ` · ${session.date}` : ''} ✦
             </div>
             <h1 className="display-decorative text-3xl md:text-4xl text-gold leading-tight mt-1">
               {session.title || `Session ${session.number}`}

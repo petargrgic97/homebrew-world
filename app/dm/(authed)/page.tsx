@@ -77,7 +77,7 @@ export default function DMHome() {
             className="card-hover panel rounded-sm p-6 block"
           >
             <div className="display text-[0.65rem] tracking-[0.4em] uppercase text-gold-dim mb-2">
-              Session {sessions[0].number} · {sessions[0].date}
+              Session {sessions[0].number}{sessions[0].date ? ` · ${sessions[0].date}` : ''}
             </div>
             <h3 className="display-decorative text-2xl text-gold leading-tight">
               {sessions[0].title || `Session ${sessions[0].number}`}

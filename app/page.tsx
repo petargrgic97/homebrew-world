@@ -61,7 +61,7 @@ export default function Home() {
             className="card-hover panel rounded-sm p-6 md:p-8 block group"
           >
             <div className="display text-[0.65rem] tracking-[0.4em] uppercase text-gold-dim mb-2">
-              Session {latest.number} · {latest.date}
+              Session {latest.number}{latest.date ? ` · ${latest.date}` : ''}
             </div>
             <h3 className="display-decorative text-3xl md:text-4xl text-gold mb-3 leading-tight">
               {latest.title || `Session ${latest.number}`}
@@ -93,12 +93,14 @@ export default function Home() {
                     Session {s.number}
                   </div>
                   <div className="display font-medium text-vellum truncate">
-                    {s.title || s.date}
+                    {s.title || s.date || `Session ${s.number}`}
                   </div>
                 </div>
-                <div className="display text-[0.6rem] tracking-[0.3em] uppercase text-vellum-dim shrink-0">
-                  {s.date}
-                </div>
+                {s.date && (
+                  <div className="display text-[0.6rem] tracking-[0.3em] uppercase text-vellum-dim shrink-0">
+                    {s.date}
+                  </div>
+                )}
               </Link>
             ))}
           </div>

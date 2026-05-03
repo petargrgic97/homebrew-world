@@ -32,9 +32,11 @@ export function SessionCard({
         </div>
       </div>
       <div className="flex-1 min-w-0">
-        <div className="display text-[0.6rem] tracking-[0.35em] uppercase text-gold-dim mb-0.5">
-          {session.date}
-        </div>
+        {session.date && (
+          <div className="display text-[0.6rem] tracking-[0.35em] uppercase text-gold-dim mb-0.5">
+            {session.date}
+          </div>
+        )}
         <div className="display font-semibold text-vellum truncate">
           {session.title || `Session ${session.number}`}
         </div>

@@ -13,13 +13,9 @@ interface Props {
   onCancel: () => void;
 }
 
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
 export function SessionForm({ initial, onSubmit, onCancel }: Props) {
   const [number, setNumber] = useState(initial?.number ?? 1);
-  const [date, setDate] = useState(initial?.date ?? todayIso());
+  const [date, setDate] = useState(initial?.date ?? '');
   const [title, setTitle] = useState(initial?.title ?? '');
   const [recap, setRecap] = useState(initial?.recap ?? '');
   const [busy, setBusy] = useState(false);
@@ -53,13 +49,12 @@ export function SessionForm({ initial, onSubmit, onCancel }: Props) {
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="date">Date</Label>
+          <Label htmlFor="date">In-game date</Label>
           <Input
             id="date"
-            type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
-            required
+            placeholder="e.g. 14. dan ljeta, 1421."
           />
         </div>
       </div>

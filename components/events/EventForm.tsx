@@ -29,10 +29,6 @@ interface Props {
 
 const NO_LINK = '__none__';
 
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
 function isFullEvent(e: CampaignEvent | InitialEventValues | undefined): e is CampaignEvent {
   return !!e && 'id' in e;
 }
@@ -55,7 +51,7 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
   );
   const [npcIds, setNpcIds] = useState<string[]>(full?.npcIds ?? initial?.npcIds ?? []);
   const [pcIds, setPcIds] = useState<string[]>(full?.pcIds ?? initial?.pcIds ?? []);
-  const [occurredAt, setOccurredAt] = useState(full?.occurredAt ?? todayIso());
+  const [occurredAt, setOccurredAt] = useState(full?.occurredAt ?? '');
   const [busy, setBusy] = useState(false);
 
   function toggleNpc(id: string) {
@@ -97,13 +93,12 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label htmlFor="occurredAt">Occurred</Label>
+          <Label htmlFor="occurredAt">In-game date</Label>
           <Input
             id="occurredAt"
-            type="date"
             value={occurredAt}
             onChange={e => setOccurredAt(e.target.value)}
-            required
+            placeholder="e.g. 14. dan ljeta, 1421."
           />
         </div>
       </div>
