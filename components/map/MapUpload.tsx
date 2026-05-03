@@ -26,7 +26,7 @@ export function MapUpload() {
       setFile(null);
       setCaption('');
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Publish failed');
+      setError(e instanceof Error ? e.message : 'Objava nije uspjela');
     } finally {
       setBusy(false);
     }
@@ -34,9 +34,9 @@ export function MapUpload() {
 
   return (
     <div className="space-y-3 border rounded p-4">
-      <h2 className="font-medium">Publish new map</h2>
+      <h2 className="font-medium">Objavi novu kartu</h2>
       <div className="space-y-1.5">
-        <Label htmlFor="map-file">Image</Label>
+        <Label htmlFor="map-file">Slika</Label>
         <input
           id="map-file"
           type="file"
@@ -45,16 +45,16 @@ export function MapUpload() {
         />
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="map-caption">Caption (optional)</Label>
+        <Label htmlFor="map-caption">Natpis (neobavezno)</Label>
         <Input
           id="map-caption"
           value={caption}
           onChange={e => setCaption(e.target.value)}
-          placeholder="e.g. Session 4 — after the wolves were freed"
+          placeholder="npr. Sesija 4 — nakon oslobođenja vukova"
         />
       </div>
       <Button onClick={handlePublish} disabled={!file || busy}>
-        {busy ? 'Publishing…' : 'Publish'}
+        {busy ? 'Objavljujem…' : 'Objavi'}
       </Button>
       {error && <div className="text-sm text-red-600">{error}</div>}
     </div>

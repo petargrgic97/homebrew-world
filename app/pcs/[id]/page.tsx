@@ -6,6 +6,7 @@ import { useEventsByPc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
 import { EventTimeline } from '@/components/events/EventTimeline';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -21,8 +22,8 @@ export default function PcDetail({
   const { data: pc, isLoading } = usePc(id);
   const { data: events } = useEventsByPc(id);
 
-  if (isLoading) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
-  if (!pc) return <div className="p-10 text-vellum-dim italic">Hero not found.</div>;
+  if (isLoading) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
+  if (!pc) return <div className="p-10 text-vellum-dim italic">Heroj nije pronađen.</div>;
 
   const subtitle = [pc.race, pc.characterClass].filter(Boolean).join(' · ');
 
@@ -46,7 +47,7 @@ export default function PcDetail({
         </div>
         <div className="space-y-1">
           <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-            ✦ a hero of the chronicle ✦
+            ✦ heroj iz kronike ✦
           </div>
           <h1 className="display-decorative text-4xl md:text-5xl text-gold leading-tight">
             {pc.name}
@@ -58,11 +59,11 @@ export default function PcDetail({
           )}
           {pc.playerName && (
             <div className="text-sm italic text-vellum-dim/80 mt-1">
-              played by <span className="text-vellum">{pc.playerName}</span>
+              igra <span className="text-vellum">{pc.playerName}</span>
             </div>
           )}
           <div className="pt-2">
-            <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{pc.status}</span>
+            <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{npcStatusLabel[pc.status]}</span>
           </div>
         </div>
         <Ornament className="max-w-xs" />
@@ -73,7 +74,7 @@ export default function PcDetail({
       {events && events.length > 0 && (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Their Deeds</span>
+            <span>Njegova djela</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <EventTimeline events={events} />

@@ -45,7 +45,7 @@ export function SessionCard({
             </div>
           )}
           <div className="display font-semibold text-vellum truncate">
-            {session.title || `Session ${session.number}`}
+            {session.title || `Sesija ${session.number}`}
           </div>
         </div>
       </div>

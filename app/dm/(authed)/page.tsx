@@ -24,7 +24,7 @@ export default function DMHome() {
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
       <div className="text-center mb-10">
         <div className="display text-[0.7rem] tracking-[0.5em] uppercase text-gold-dim mb-3">
-          ✦ Master’s tome ✦
+          ✦ Tom mastera ✦
         </div>
         <h1 className="display-decorative text-4xl md:text-5xl font-bold text-gold leading-none">
           Homebrew World
@@ -35,26 +35,26 @@ export default function DMHome() {
       {/* Quick conjures */}
       <section className="mb-10">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <QuickAction href="/dm/sessions/new" label="Begin Session" />
-          <QuickAction href="/dm/locations/new" label="Mark Location" />
-          <QuickAction href="/dm/npcs/new" label="Inscribe NPC" />
-          <QuickAction href="/dm/pcs/new" label="Add Hero" />
-          <QuickAction href="/dm/plots/new" label="Plot Scheme" />
+          <QuickAction href="/dm/sessions/new" label="Započni sesiju" />
+          <QuickAction href="/dm/locations/new" label="Označi lokaciju" />
+          <QuickAction href="/dm/npcs/new" label="Upiši lika" />
+          <QuickAction href="/dm/pcs/new" label="Dodaj heroja" />
+          <QuickAction href="/dm/plots/new" label="Smisli spletku" />
         </div>
       </section>
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-12 max-w-3xl mx-auto">
-        <Stat label="Party" value={pcs.length} href="/dm/pcs" />
-        <Stat label="Locations" value={locations.length} href="/dm/locations" />
-        <Stat label="Personae" value={npcs.length} href="/dm/npcs" />
-        <Stat label="Sessions" value={sessions.length} href="/dm/sessions" />
-        <Stat label="Schemes" value={plots.length} href="/dm/plots" />
+        <Stat label="Družina" value={pcs.length} href="/dm/pcs" />
+        <Stat label="Lokacije" value={locations.length} href="/dm/locations" />
+        <Stat label="Likovi" value={npcs.length} href="/dm/npcs" />
+        <Stat label="Sesije" value={sessions.length} href="/dm/sessions" />
+        <Stat label="Spletke" value={plots.length} href="/dm/plots" />
       </div>
 
       {activePlots.length > 0 && (
         <section className="mb-12">
-          <SectionHeading eyebrow="Threads in motion" title="Active Schemes" />
+          <SectionHeading eyebrow="Niti u tijeku" title="Aktivne spletke" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {activePlots.slice(0, 6).map(p => <PlotCard key={p.id} plot={p} />)}
           </div>
@@ -63,7 +63,7 @@ export default function DMHome() {
 
       {map && (
         <section className="mb-12">
-          <SectionHeading eyebrow="The known lands" title="Current Map" />
+          <SectionHeading eyebrow="Poznate zemlje" title="Trenutna karta" />
           <Link href="/dm/map" className="block">
             <MapDisplay map={map} />
           </Link>
@@ -72,16 +72,16 @@ export default function DMHome() {
 
       {latestSession && (
         <section>
-          <SectionHeading eyebrow="Last entry" title="Most Recent Session" />
+          <SectionHeading eyebrow="Posljednji upis" title="Najnovija sesija" />
           <Link
             href={`/dm/sessions/${latestSession.id}`}
             className="card-hover panel rounded-sm p-6 block"
           >
             <div className="display text-[0.65rem] tracking-[0.4em] uppercase text-gold-dim mb-2">
-              Session {latestSession.number}{latestSession.date ? ` · ${latestSession.date}` : ''}
+              Sesija {latestSession.number}{latestSession.date ? ` · ${latestSession.date}` : ''}
             </div>
             <h3 className="display-decorative text-2xl text-gold leading-tight">
-              {latestSession.title || `Session ${latestSession.number}`}
+              {latestSession.title || `Sesija ${latestSession.number}`}
             </h3>
           </Link>
         </section>

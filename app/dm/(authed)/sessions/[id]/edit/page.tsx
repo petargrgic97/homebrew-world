@@ -15,11 +15,11 @@ export default function EditSession({
   const { data: session } = useSession(id);
   const router = useRouter();
 
-  if (!session) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!session) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Amend the chronicle" title="Edit Session" />
+      <PageHeader eyebrow="Izmijeni kroniku" title="Uredi sesiju" />
       <SessionForm
         initial={session}
         onSubmit={async (input) => {

@@ -34,11 +34,11 @@ export function LocationForm({ initial, onSubmit, onCancel }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="space-y-1.5">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Ime</Label>
         <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="order">Order</Label>
+        <Label htmlFor="order">Redoslijed</Label>
         <Input
           id="order"
           type="number"
@@ -47,11 +47,11 @@ export function LocationForm({ initial, onSubmit, onCancel }: Props) {
         />
       </div>
       <div className="space-y-1.5">
-        <Label>Image</Label>
+        <Label>Slika</Label>
         <ImageUpload folder="location-images" initialUrl={imageUrl} onUploaded={setImageUrl} />
       </div>
       <div className="space-y-2">
-        <Label>Description (markdown)</Label>
+        <Label>Opis (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -59,9 +59,9 @@ export function LocationForm({ initial, onSubmit, onCancel }: Props) {
       </div>
       <div className="flex gap-2">
         <Button type="submit" disabled={busy || !name}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

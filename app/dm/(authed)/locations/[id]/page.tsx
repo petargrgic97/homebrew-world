@@ -26,7 +26,7 @@ export default function DMLocationDetail({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
-  if (!location) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!location) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   async function handleDelete() {
     await deleteLocation(db, id);
@@ -40,7 +40,7 @@ export default function DMLocationDetail({
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-              ✦ a place upon the map ✦
+              ✦ mjesto na karti ✦
             </div>
             <h1 className="display-decorative text-4xl md:text-5xl text-gold leading-tight mt-1">
               {location.name}
@@ -48,10 +48,10 @@ export default function DMLocationDetail({
           </div>
           <div className="flex gap-2 shrink-0">
             <Button asChild variant="outline">
-              <Link href={`/dm/locations/${id}/edit`}>Edit</Link>
+              <Link href={`/dm/locations/${id}/edit`}>Uredi</Link>
             </Button>
             <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-              Delete
+              Obriši
             </Button>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function DMLocationDetail({
       <section>
         <div className="flex items-center justify-between mb-4 gap-3">
           <h2 className="section-title flex items-center gap-3 flex-1">
-            <span>Souls Encountered Here</span>
+            <span>Likovi ovdje</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
         </div>
@@ -84,34 +84,34 @@ export default function DMLocationDetail({
             {npcs.map(n => <NpcCard key={n.id} npc={n} basePath="/dm/npcs" />)}
           </div>
         ) : (
-          <div className="text-sm text-vellum-dim italic">No souls linked here yet.</div>
+          <div className="text-sm text-vellum-dim italic">Ovdje još nema povezanih likova.</div>
         )}
       </section>
 
       <section>
         <div className="flex items-center justify-between mb-4 gap-3">
           <h2 className="section-title flex items-center gap-3 flex-1">
-            <span>What Came to Pass</span>
+            <span>Što se zbilo</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/dm/events/new?locationId=${id}`}>+ Add event</Link>
+            <Link href={`/dm/events/new?locationId=${id}`}>+ Dodaj događaj</Link>
           </Button>
         </div>
         {events && events.length > 0 ? (
           <EventTimeline events={events} dmEditable />
         ) : (
-          <div className="text-sm text-vellum-dim italic">No events recorded yet.</div>
+          <div className="text-sm text-vellum-dim italic">Još nema zabilježenih događaja.</div>
         )}
       </section>
 
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Delete location?"
-        description="This cannot be undone. NPCs and events tied here will be unlinked but not deleted."
+        title="Obrisati lokaciju?"
+        description="Ovo se ne može poništiti. Likovi i događaji povezani s ovom lokacijom bit će odvojeni, ali ne i obrisani."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={handleDelete}
       />
     </article>

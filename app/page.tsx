@@ -22,7 +22,7 @@ export default function Home() {
       {/* Tome cover */}
       <div className="text-center mb-12 md:mb-16">
         <div className="display text-[0.7rem] tracking-[0.5em] uppercase text-gold-dim mb-4">
-          ✦ a chronicle of ✦
+          ✦ kronika o ✦
         </div>
         <h1 className="display-decorative text-5xl md:text-7xl font-bold text-gold leading-none tracking-wide">
           Homebrew
@@ -30,23 +30,23 @@ export default function Home() {
           <span className="italic">World</span>
         </h1>
         <div className="mt-5 italic text-vellum-dim text-lg max-w-md mx-auto">
-          Wherein are recorded the deeds, the dwellings, and the souls met on the road.
+          U kojoj su zapisana djela, mjesta i duše susrete na putu.
         </div>
         <Ornament className="max-w-xs mx-auto mt-7" />
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 max-w-2xl mx-auto">
-        <Stat label="Party" value={pcs.length} href="/pcs" />
-        <Stat label="Locations" value={locations.length} href="/locations" />
-        <Stat label="Personae" value={npcs.length} href="/npcs" />
-        <Stat label="Sessions" value={sessions.length} href="/sessions" />
+        <Stat label="Družina" value={pcs.length} href="/pcs" />
+        <Stat label="Lokacije" value={locations.length} href="/locations" />
+        <Stat label="Likovi" value={npcs.length} href="/npcs" />
+        <Stat label="Sesije" value={sessions.length} href="/sessions" />
       </div>
 
       {/* Featured map */}
       {map && (
         <section className="mb-14">
-          <SectionHeading eyebrow="The known lands" title="World Map" />
+          <SectionHeading eyebrow="Poznate zemlje" title="Karta svijeta" />
           <Link href="/map" className="block group">
             <MapDisplay map={map} />
           </Link>
@@ -56,16 +56,16 @@ export default function Home() {
       {/* Latest session highlight */}
       {latest && (
         <section className="mb-14">
-          <SectionHeading eyebrow="Most recently transcribed" title="From the Chronicle" />
+          <SectionHeading eyebrow="Posljednji upis" title="Iz kronike" />
           <Link
             href={`/sessions/${latest.id}`}
             className="card-hover panel rounded-sm p-6 md:p-8 block group"
           >
             <div className="display text-[0.65rem] tracking-[0.4em] uppercase text-gold-dim mb-2">
-              Session {latest.number}{latest.date ? ` · ${latest.date}` : ''}
+              Sesija {latest.number}{latest.date ? ` · ${latest.date}` : ''}
             </div>
             <h3 className="display-decorative text-3xl md:text-4xl text-gold mb-3 leading-tight">
-              {latest.title || `Session ${latest.number}`}
+              {latest.title || `Sesija ${latest.number}`}
             </h3>
             {latest.recap && (
               <div className="text-vellum-dim line-clamp-4 italic">
@@ -73,7 +73,7 @@ export default function Home() {
               </div>
             )}
             <div className="mt-4 display text-[0.65rem] tracking-[0.3em] uppercase text-gold group-hover:text-gold-bright transition-colors">
-              read entry →
+              pročitaj zapis →
             </div>
           </Link>
         </section>
@@ -81,7 +81,7 @@ export default function Home() {
 
       {sessionsByNewest.length > 1 && (
         <section className="mb-14">
-          <SectionHeading eyebrow="Earlier" title="Previous Sessions" />
+          <SectionHeading eyebrow="Ranije" title="Prethodne sesije" />
           <div className="grid gap-3 sm:grid-cols-2">
             {sessionsByNewest.slice(1, 5).map(s => (
               <Link
@@ -91,10 +91,10 @@ export default function Home() {
               >
                 <div className="min-w-0">
                   <div className="display text-[0.6rem] tracking-[0.35em] uppercase text-gold-dim">
-                    Session {s.number}
+                    Sesija {s.number}
                   </div>
                   <div className="display font-medium text-vellum truncate">
-                    {s.title || s.date || `Session ${s.number}`}
+                    {s.title || s.date || `Sesija ${s.number}`}
                   </div>
                 </div>
                 {s.date && (
@@ -110,7 +110,7 @@ export default function Home() {
 
       {sessions.length === 0 && locations.length === 0 && (
         <div className="text-center text-vellum-dim italic py-16 panel rounded-sm">
-          The chronicle is empty. The first chapter is yet to be written.
+          Kronika je prazna. Prvo poglavlje tek treba biti napisano.
         </div>
       )}
     </div>

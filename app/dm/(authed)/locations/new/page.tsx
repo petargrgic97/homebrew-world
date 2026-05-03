@@ -10,7 +10,7 @@ export default function NewLocation() {
   const router = useRouter();
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Inscribe a place" title="New Location" />
+      <PageHeader eyebrow="Upiši mjesto" title="Nova lokacija" />
       <LocationForm
         onSubmit={async (input) => {
           const id = await createLocation(db, input);

@@ -3,22 +3,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const playerLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/pcs', label: 'Party' },
-  { href: '/locations', label: 'Locs' },
-  { href: '/npcs', label: 'NPCs' },
-  { href: '/sessions', label: 'Logs' },
-  { href: '/map', label: 'Map' },
+  { href: '/', label: 'Naslo' },
+  { href: '/pcs', label: 'Druž' },
+  { href: '/locations', label: 'Lok' },
+  { href: '/npcs', label: 'Likovi' },
+  { href: '/sessions', label: 'Sesije' },
+  { href: '/map', label: 'Karta' },
 ];
 
 const dmLinks = [
-  { href: '/dm', label: 'Home' },
-  { href: '/dm/pcs', label: 'Party' },
-  { href: '/dm/locations', label: 'Locs' },
-  { href: '/dm/npcs', label: 'NPCs' },
-  { href: '/dm/sessions', label: 'Logs' },
-  { href: '/dm/plots', label: 'Plot' },
-  { href: '/dm/map', label: 'Map' },
+  { href: '/dm', label: 'Naslo' },
+  { href: '/dm/pcs', label: 'Druž' },
+  { href: '/dm/locations', label: 'Lok' },
+  { href: '/dm/npcs', label: 'Likovi' },
+  { href: '/dm/sessions', label: 'Sesije' },
+  { href: '/dm/plots', label: 'Spletke' },
+  { href: '/dm/map', label: 'Karta' },
 ];
 
 function isActive(pathname: string, href: string): boolean {

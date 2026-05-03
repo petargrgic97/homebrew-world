@@ -12,20 +12,20 @@ export default function MapPage() {
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
-      <PageHeader eyebrow="The known lands" title="World Map" />
+      <PageHeader eyebrow="Poznate zemlje" title="Karta svijeta" />
       {isLoading ? (
-        <div className="text-vellum-dim italic">Unrolling the parchment…</div>
+        <div className="text-vellum-dim italic">Razmotam pergament…</div>
       ) : current ? (
         <MapDisplay map={current} />
       ) : (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          No map yet drawn.
+          Karta još nije iscrtana.
         </div>
       )}
       {past.length > 0 && (
         <section className="mt-12">
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Earlier Drafts</span>
+            <span>Ranije skice</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">

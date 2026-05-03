@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { deletePlot } from '@/lib/firestore/plots';
 import { db } from '@/lib/firebase';
+import { plotStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   active: 'text-emerald-300/90',
@@ -31,7 +32,7 @@ export default function DMPlotDetail({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
-  if (!plot) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!plot) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   const linkedNpcs = npcs.filter(n => (plot.npcIds ?? []).includes(n.id));
   const linkedPcs = pcs.filter(p => (plot.pcIds ?? []).includes(p.id));
@@ -49,19 +50,19 @@ export default function DMPlotDetail({
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-              ✦ a scheme in motion ✦
+              ✦ spletka u tijeku ✦
             </div>
             <h1 className="display-decorative text-3xl md:text-4xl text-gold leading-tight mt-1">
               {plot.title}
             </h1>
-            <span className={`seal mt-2 ${statusStyle[plot.status] ?? 'text-vellum-dim'}`}>{plot.status}</span>
+            <span className={`seal mt-2 ${statusStyle[plot.status] ?? 'text-vellum-dim'}`}>{plotStatusLabel[plot.status]}</span>
           </div>
           <div className="flex gap-2 shrink-0">
             <Button asChild variant="outline">
-              <Link href={`/dm/plots/${id}/edit`}>Edit</Link>
+              <Link href={`/dm/plots/${id}/edit`}>Uredi</Link>
             </Button>
             <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-              Delete
+              Obriši
             </Button>
           </div>
         </div>
@@ -73,7 +74,7 @@ export default function DMPlotDetail({
       {linkedPcs.length > 0 && (
         <section>
           <h2 className="section-title mb-3 flex items-center gap-3">
-            <span>Heroes at Stake</span>
+            <span>Heroji u pitanju</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <ul className="space-y-1">
@@ -94,7 +95,7 @@ export default function DMPlotDetail({
       {linkedNpcs.length > 0 && (
         <section>
           <h2 className="section-title mb-3 flex items-center gap-3">
-            <span>Souls Entangled</span>
+            <span>Upleteni likovi</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <ul className="space-y-1">
@@ -115,7 +116,7 @@ export default function DMPlotDetail({
       {linkedLocations.length > 0 && (
         <section>
           <h2 className="section-title mb-3 flex items-center gap-3">
-            <span>Places at Stake</span>
+            <span>Mjesta u igri</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <ul className="space-y-1">
@@ -136,10 +137,10 @@ export default function DMPlotDetail({
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Delete plot?"
-        description="This cannot be undone."
+        title="Obrisati spletku?"
+        description="Ovo se ne može poništiti."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={handleDelete}
       />
     </article>

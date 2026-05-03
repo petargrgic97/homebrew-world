@@ -15,11 +15,11 @@ export default function EditNpc({
   const { data: npc } = useNpc(id);
   const router = useRouter();
 
-  if (!npc) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!npc) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Amend the record" title="Edit NPC" />
+      <PageHeader eyebrow="Izmijeni zapis" title="Uredi lika" />
       <NpcForm
         initial={npc}
         onSubmit={async (input) => {

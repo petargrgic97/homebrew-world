@@ -11,7 +11,7 @@ export function AuthGate({ children }: { children: ReactNode }) {
     if (!loading && !isDM) router.replace('/dm/login');
   }, [loading, isDM, router]);
 
-  if (loading) return <div className="p-8">Loading…</div>;
+  if (loading) return <div className="p-8">Učitavam…</div>;
   if (!isDM) return null;
   return <>{children}</>;
 }

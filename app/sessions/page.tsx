@@ -22,12 +22,12 @@ export default function SessionsPage() {
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
-      <PageHeader eyebrow="Entries in the chronicle" title="Sessions" />
+      <PageHeader eyebrow="Zapisi kronike" title="Sesije" />
       {isLoading ? (
-        <div className="text-vellum-dim italic">Turning the pages…</div>
+        <div className="text-vellum-dim italic">Listam stranice…</div>
       ) : !sessions || sessions.length === 0 ? (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          The chronicle is yet to be opened.
+          Kronika još nije otvorena.
         </div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">

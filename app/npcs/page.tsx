@@ -27,12 +27,12 @@ export default function NpcsPage() {
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-6xl mx-auto">
-      <PageHeader eyebrow="Dramatis Personae" title="NPCs" />
+      <PageHeader eyebrow="Dramatis Personae" title="Likovi" />
       {isLoading ? (
-        <div className="text-vellum-dim italic">Searching the records…</div>
+        <div className="text-vellum-dim italic">Pretražujem zapise…</div>
       ) : npcs.length === 0 ? (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          No souls inscribed yet.
+          Još nema upisanih likova.
         </div>
       ) : (
         <>

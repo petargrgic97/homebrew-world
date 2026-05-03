@@ -17,7 +17,7 @@ function NewEventInner() {
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Record what came to pass" title="New Event" />
+      <PageHeader eyebrow="Zabilježi što se zbilo" title="Novi događaj" />
       <EventForm
         initial={{
           locationId,
@@ -42,7 +42,7 @@ function NewEventInner() {
 
 export default function NewEvent() {
   return (
-    <Suspense fallback={<div className="p-10 text-vellum-dim italic">Loading…</div>}>
+    <Suspense fallback={<div className="p-10 text-vellum-dim italic">Učitavam…</div>}>
       <NewEventInner />
     </Suspense>
   );

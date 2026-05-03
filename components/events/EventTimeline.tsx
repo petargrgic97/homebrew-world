@@ -61,7 +61,7 @@ export function EventTimeline({ events, dmEditable }: Props) {
                   href={`/dm/events/${e.id}/edit`}
                   className="text-[0.65rem] tracking-[0.3em] uppercase display text-gold-dim hover:text-gold shrink-0"
                 >
-                  edit
+                  uredi
                 </Link>
               )}
             </div>
@@ -72,7 +72,7 @@ export function EventTimeline({ events, dmEditable }: Props) {
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-vellum-dim">
                 {location && (
                   <span>
-                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">at</span>
+                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">na</span>
                     <Link
                       href={`${basePrefix}/locations/${location.id}`}
                       className="text-gold-bright hover:text-gold underline decoration-gold-dim/40 underline-offset-2"
@@ -83,7 +83,7 @@ export function EventTimeline({ events, dmEditable }: Props) {
                 )}
                 {linkedPcs.length > 0 && (
                   <span>
-                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">heroes</span>
+                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">heroji</span>
                     {linkedPcs.map((p, i) => (
                       <span key={p.id}>
                         {i > 0 && <span className="text-gold-dim/40">, </span>}
@@ -99,7 +99,7 @@ export function EventTimeline({ events, dmEditable }: Props) {
                 )}
                 {linkedNpcs.length > 0 && (
                   <span>
-                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">npcs</span>
+                    <span className="display tracking-[0.2em] uppercase text-[0.6rem] text-gold-dim mr-1.5">likovi</span>
                     {linkedNpcs.map((n, i) => (
                       <span key={n.id}>
                         {i > 0 && <span className="text-gold-dim/40">, </span>}

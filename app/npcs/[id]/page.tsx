@@ -8,6 +8,7 @@ import { useEventsByNpc } from '@/lib/hooks/useEvents';
 import { Markdown } from '@/components/shared/Markdown';
 import { Ornament } from '@/components/shared/Ornament';
 import { EventTimeline } from '@/components/events/EventTimeline';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -24,8 +25,8 @@ export default function NpcDetail({
   const { data: location } = useLocation(npc?.locationId ?? '');
   const { data: events } = useEventsByNpc(id);
 
-  if (isLoading) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
-  if (!npc) return <div className="p-10 text-vellum-dim italic">NPC not found.</div>;
+  if (isLoading) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
+  if (!npc) return <div className="p-10 text-vellum-dim italic">Lik nije pronađen.</div>;
 
   return (
     <article className="px-6 md:px-10 py-10 max-w-3xl mx-auto space-y-8">
@@ -47,13 +48,13 @@ export default function NpcDetail({
         </div>
         <div className="flex-1 space-y-3">
           <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-            ✦ a soul of note ✦
+            ✦ lik vrijedan spomena ✦
           </div>
           <h1 className="display-decorative text-4xl md:text-5xl text-gold leading-tight">
             {npc.name}
           </h1>
           <div className="flex flex-wrap items-center gap-2">
-            <span className={`seal ${statusStyle[npc.status] ?? 'text-vellum-dim'}`}>{npc.status}</span>
+            <span className={`seal ${statusStyle[npc.status] ?? 'text-vellum-dim'}`}>{npcStatusLabel[npc.status]}</span>
             {npc.faction && (
               <span className="display text-[0.65rem] tracking-[0.3em] uppercase text-vellum-dim italic">
                 {npc.faction}
@@ -76,7 +77,7 @@ export default function NpcDetail({
       {events && events.length > 0 && (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Where They Appear</span>
+            <span>Gdje se pojavljuje</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <EventTimeline events={events} />

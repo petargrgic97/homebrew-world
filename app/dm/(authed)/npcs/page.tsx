@@ -31,18 +31,18 @@ export default function DMNpcsPage() {
     <div className="px-6 md:px-10 py-10 max-w-6xl mx-auto">
       <PageHeader
         eyebrow="Dramatis Personae"
-        title="NPCs"
+        title="Likovi"
         actions={
           <Button asChild>
-            <Link href="/dm/npcs/new">+ Inscribe NPC</Link>
+            <Link href="/dm/npcs/new">+ Upiši lika</Link>
           </Button>
         }
       />
       {isLoading ? (
-        <div className="text-vellum-dim italic">Loading…</div>
+        <div className="text-vellum-dim italic">Učitavam…</div>
       ) : npcs.length === 0 ? (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          No souls inscribed yet.
+          Još nema upisanih likova.
         </div>
       ) : (
         <>

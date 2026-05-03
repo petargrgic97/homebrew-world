@@ -11,6 +11,7 @@ import { LinkInserter } from '@/components/shared/LinkInserter';
 import { ImageUpload } from '@/components/shared/ImageUpload';
 import { useLocations } from '@/lib/hooks/useLocations';
 import type { Npc, NpcStatus, WriteInput } from '@/lib/types';
+import { npcStatusLabel } from '@/lib/i18n';
 
 interface Props {
   initial?: Npc;
@@ -51,7 +52,7 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="space-y-1.5">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Ime</Label>
         <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
       </div>
 
@@ -61,27 +62,27 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
           <Select value={status} onValueChange={(v) => setStatus(v as NpcStatus)}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              {statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+              {statuses.map(s => <SelectItem key={s} value={s}>{npcStatusLabel[s]}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="faction">Role</Label>
+          <Label htmlFor="faction">Uloga</Label>
           <Input
             id="faction"
             value={faction}
             onChange={e => setFaction(e.target.value)}
-            placeholder="e.g. fisherman, housekeeper"
+            placeholder="npr. ribar, kuharica"
           />
         </div>
       </div>
 
       <div className="space-y-1.5">
-        <Label>Location</Label>
+        <Label>Lokacija</Label>
         <Select value={locationId} onValueChange={setLocationId}>
           <SelectTrigger><SelectValue /></SelectTrigger>
           <SelectContent>
-            <SelectItem value={NO_LOCATION}>(no location)</SelectItem>
+            <SelectItem value={NO_LOCATION}>(bez lokacije)</SelectItem>
             {locations.map(l => (
               <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
             ))}
@@ -90,7 +91,7 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-1.5">
-        <Label>Portrait</Label>
+        <Label>Portret</Label>
         <ImageUpload
           folder="npc-portraits"
           initialUrl={portraitUrl}
@@ -99,7 +100,7 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label>Description (markdown)</Label>
+        <Label>Opis (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -108,9 +109,9 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="flex gap-2">
         <Button type="submit" disabled={busy || !name}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

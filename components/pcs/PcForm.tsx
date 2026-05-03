@@ -10,6 +10,7 @@ import { MarkdownEditor } from '@/components/shared/MarkdownEditor';
 import { LinkInserter } from '@/components/shared/LinkInserter';
 import { ImageUpload } from '@/components/shared/ImageUpload';
 import type { Pc, NpcStatus, WriteInput } from '@/lib/types';
+import { npcStatusLabel } from '@/lib/i18n';
 
 interface Props {
   initial?: Pc;
@@ -46,37 +47,37 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label htmlFor="name">Character name</Label>
+          <Label htmlFor="name">Ime lika</Label>
           <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="playerName">Player</Label>
+          <Label htmlFor="playerName">Igrač</Label>
           <Input
             id="playerName"
             value={playerName}
             onChange={e => setPlayerName(e.target.value)}
-            placeholder="e.g. Petar"
+            placeholder="npr. Petar"
           />
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label htmlFor="race">Race</Label>
+          <Label htmlFor="race">Rasa</Label>
           <Input
             id="race"
             value={race}
             onChange={e => setRace(e.target.value)}
-            placeholder="Half-elf"
+            placeholder="Polu-vilenjak"
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="class">Class</Label>
+          <Label htmlFor="class">Klasa</Label>
           <Input
             id="class"
             value={characterClass}
             onChange={e => setCharacterClass(e.target.value)}
-            placeholder="Wizard"
+            placeholder="Druid"
           />
         </div>
       </div>
@@ -86,13 +87,13 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
         <Select value={status} onValueChange={(v) => setStatus(v as NpcStatus)}>
           <SelectTrigger><SelectValue /></SelectTrigger>
           <SelectContent>
-            {statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+            {statuses.map(s => <SelectItem key={s} value={s}>{npcStatusLabel[s]}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
 
       <div className="space-y-1.5">
-        <Label>Portrait</Label>
+        <Label>Portret</Label>
         <ImageUpload
           folder="pc-portraits"
           initialUrl={portraitUrl}
@@ -101,7 +102,7 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label>Backstory & notes (markdown)</Label>
+        <Label>Pozadina i bilješke (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -110,9 +111,9 @@ export function PcForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="flex gap-2">
         <Button type="submit" disabled={busy || !name}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

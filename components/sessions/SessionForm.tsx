@@ -39,7 +39,7 @@ export function SessionForm({ initial, onSubmit, onCancel }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label htmlFor="number">Session #</Label>
+          <Label htmlFor="number">Sesija #</Label>
           <Input
             id="number"
             type="number"
@@ -49,26 +49,26 @@ export function SessionForm({ initial, onSubmit, onCancel }: Props) {
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="date">In-game date</Label>
+          <Label htmlFor="date">Datum u igri</Label>
           <Input
             id="date"
             value={date}
             onChange={e => setDate(e.target.value)}
-            placeholder="e.g. 14. dan ljeta, 1421."
+            placeholder="npr. 14. dan ljeta, 1421."
           />
         </div>
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="title">Title (optional)</Label>
+        <Label htmlFor="title">Naslov (neobavezno)</Label>
         <Input
           id="title"
           value={title}
           onChange={e => setTitle(e.target.value)}
-          placeholder="e.g. The Fountain Incident"
+          placeholder="npr. Incident s fontanom"
         />
       </div>
       <div className="space-y-2">
-        <Label>Recap (markdown)</Label>
+        <Label>Sažetak (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setRecap(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -76,9 +76,9 @@ export function SessionForm({ initial, onSubmit, onCancel }: Props) {
       </div>
       <div className="flex gap-2">
         <Button type="submit" disabled={busy}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

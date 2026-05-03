@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Npc } from '@/lib/types';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<Npc['status'], string> = {
   alive: 'text-emerald-300/90',
@@ -42,7 +43,7 @@ export function NpcCard({
           </div>
         )}
         <div className="pt-1">
-          <span className={`seal ${statusStyle[npc.status]}`}>{npc.status}</span>
+          <span className={`seal ${statusStyle[npc.status]}`}>{npcStatusLabel[npc.status]}</span>
         </div>
       </div>
     </Link>

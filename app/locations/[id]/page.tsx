@@ -17,14 +17,14 @@ export default function LocationDetail({
   const { data: npcs } = useNpcsByLocation(id);
   const { data: events } = useEventsByLocation(id);
 
-  if (isLoading) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
-  if (!location) return <div className="p-10 text-vellum-dim italic">Location not found.</div>;
+  if (isLoading) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
+  if (!location) return <div className="p-10 text-vellum-dim italic">Lokacija nije pronađena.</div>;
 
   return (
     <article className="px-6 md:px-10 py-10 max-w-3xl mx-auto space-y-8">
       <header className="text-center space-y-3">
         <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-          ✦ a place upon the map ✦
+          ✦ mjesto na karti ✦
         </div>
         <h1 className="display-decorative text-4xl md:text-5xl text-gold leading-tight">
           {location.name}
@@ -49,7 +49,7 @@ export default function LocationDetail({
       {npcs && npcs.length > 0 && (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Souls Encountered Here</span>
+            <span>Likovi ovdje</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -61,7 +61,7 @@ export default function LocationDetail({
       {events && events.length > 0 && (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>What Came to Pass</span>
+            <span>Što se zbilo</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <EventTimeline events={events} />

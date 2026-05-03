@@ -10,7 +10,7 @@ export default function NewPc() {
   const router = useRouter();
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Welcome a hero" title="New Player Character" />
+      <PageHeader eyebrow="Pozdravi heroja" title="Novi heroj" />
       <PcForm
         onSubmit={async (input) => {
           const id = await createPc(db, input);

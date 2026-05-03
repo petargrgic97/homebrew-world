@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Pc } from '@/lib/types';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -40,11 +41,11 @@ export function PcCard({
       </div>
       {pc.playerName && (
         <div className="text-xs italic text-vellum-dim/80 mt-2">
-          played by <span className="text-vellum">{pc.playerName}</span>
+          igra <span className="text-vellum">{pc.playerName}</span>
         </div>
       )}
       <div className="mt-3">
-        <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{pc.status}</span>
+        <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{npcStatusLabel[pc.status]}</span>
       </div>
     </Link>
   );

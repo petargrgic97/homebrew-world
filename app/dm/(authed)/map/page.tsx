@@ -26,28 +26,28 @@ export default function DMMapPage() {
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto space-y-10">
-      <PageHeader eyebrow="The known lands" title="Map" />
+      <PageHeader eyebrow="Poznate zemlje" title="Karta" />
 
       <MapUpload />
 
       {current ? (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Current Drawing</span>
+            <span>Trenutna skica</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <MapDisplay map={current} />
         </section>
       ) : (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          No map yet drawn.
+          Karta još nije iscrtana.
         </div>
       )}
 
       {past.length > 0 && (
         <section>
           <h2 className="section-title mb-4 flex items-center gap-3">
-            <span>Earlier Drafts ({past.length})</span>
+            <span>Ranije skice ({past.length})</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3">
@@ -71,7 +71,7 @@ export default function DMMapPage() {
                   className="text-xs text-blood-bright hover:text-blood-bright/80 hover:bg-blood/10"
                   onClick={() => setConfirmDeleteId(v.id)}
                 >
-                  Delete
+                  Obriši
                 </Button>
               </figure>
             ))}
@@ -82,10 +82,10 @@ export default function DMMapPage() {
       <ConfirmDialog
         open={confirmDeleteId !== null}
         onOpenChange={(open) => { if (!open) setConfirmDeleteId(null); }}
-        title="Delete map version?"
-        description="This permanently removes this past version. The current map is not affected."
+        title="Obrisati verziju karte?"
+        description="Ovo trajno uklanja ovu prethodnu verziju. Trenutna karta ostaje netaknuta."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={() => { if (confirmDeleteId) handleDelete(confirmDeleteId); }}
       />
     </div>

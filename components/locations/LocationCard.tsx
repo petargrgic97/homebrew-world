@@ -28,7 +28,7 @@ export function LocationCard({
       </div>
       <div className="p-4 border-t border-border">
         <div className="display text-[0.6rem] tracking-[0.4em] uppercase text-gold-dim mb-1">
-          location
+          lokacija
         </div>
         <h3 className="display font-semibold text-vellum text-lg leading-tight">
           {location.name}

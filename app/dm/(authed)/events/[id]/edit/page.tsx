@@ -18,7 +18,7 @@ export default function EditEvent({
   const router = useRouter();
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  if (!event) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!event) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   async function handleDelete() {
     await deleteEvent(db, id);
@@ -33,11 +33,11 @@ export default function EditEvent({
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
       <PageHeader
-        eyebrow="Amend the record"
-        title="Edit Event"
+        eyebrow="Izmijeni zapis"
+        title="Uredi događaj"
         actions={
           <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-            Delete
+            Obriši
           </Button>
         }
       />
@@ -68,10 +68,10 @@ export default function EditEvent({
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Delete event?"
-        description="This cannot be undone."
+        title="Obrisati događaj?"
+        description="Ovo se ne može poništiti."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={handleDelete}
       />
     </div>

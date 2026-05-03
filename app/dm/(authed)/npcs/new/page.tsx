@@ -10,7 +10,7 @@ export default function NewNpc() {
   const router = useRouter();
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Inscribe a soul" title="New NPC" />
+      <PageHeader eyebrow="Upiši lika" title="Novi lik" />
       <NpcForm
         onSubmit={async (input) => {
           const id = await createNpc(db, input);

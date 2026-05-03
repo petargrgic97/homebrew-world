@@ -15,11 +15,11 @@ export default function EditPlot({
   const { data: plot } = usePlot(id);
   const router = useRouter();
 
-  if (!plot) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!plot) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Amend the scheme" title="Edit Plot" />
+      <PageHeader eyebrow="Izmijeni spletku" title="Uredi spletku" />
       <PlotForm
         initial={plot}
         onSubmit={async (input) => {

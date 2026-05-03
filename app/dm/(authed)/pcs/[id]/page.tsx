@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { deletePc } from '@/lib/firestore/pcs';
 import { db } from '@/lib/firebase';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -30,7 +31,7 @@ export default function DMPcDetail({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
-  if (!pc) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!pc) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   const subtitle = [pc.race, pc.characterClass].filter(Boolean).join(' · ');
 
@@ -62,7 +63,7 @@ export default function DMPcDetail({
             </div>
             <div className="flex-1 space-y-1 min-w-0">
               <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-                ✦ a hero of the chronicle ✦
+                ✦ heroj iz kronike ✦
               </div>
               <h1 className="display-decorative text-3xl md:text-4xl text-gold leading-tight">
                 {pc.name}
@@ -74,20 +75,20 @@ export default function DMPcDetail({
               )}
               {pc.playerName && (
                 <div className="text-sm italic text-vellum-dim/80">
-                  played by <span className="text-vellum">{pc.playerName}</span>
+                  igra <span className="text-vellum">{pc.playerName}</span>
                 </div>
               )}
               <div className="pt-1">
-                <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{pc.status}</span>
+                <span className={`seal ${statusStyle[pc.status] ?? 'text-vellum-dim'}`}>{npcStatusLabel[pc.status]}</span>
               </div>
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
             <Button asChild variant="outline">
-              <Link href={`/dm/pcs/${id}/edit`}>Edit</Link>
+              <Link href={`/dm/pcs/${id}/edit`}>Uredi</Link>
             </Button>
             <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-              Delete
+              Obriši
             </Button>
           </div>
         </div>
@@ -98,27 +99,27 @@ export default function DMPcDetail({
       <section>
         <div className="flex items-center justify-between mb-4 gap-3">
           <h2 className="section-title flex items-center gap-3 flex-1">
-            <span>Their Deeds</span>
+            <span>Njegova djela</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/dm/events/new?pcId=${id}`}>+ Add event</Link>
+            <Link href={`/dm/events/new?pcId=${id}`}>+ Dodaj događaj</Link>
           </Button>
         </div>
         {events && events.length > 0 ? (
           <EventTimeline events={events} dmEditable />
         ) : (
-          <div className="text-sm text-vellum-dim italic">No events involve this hero yet.</div>
+          <div className="text-sm text-vellum-dim italic">Ovaj heroj još nije povezan ni s jednim događajem.</div>
         )}
       </section>
 
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Remove from the party?"
-        description="This cannot be undone."
+        title="Maknuti iz družine?"
+        description="Ovo se ne može poništiti."
         destructive
-        confirmText="Remove"
+        confirmText="Makni"
         onConfirm={handleDelete}
       />
     </article>

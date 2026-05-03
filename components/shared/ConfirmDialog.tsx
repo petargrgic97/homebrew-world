@@ -16,7 +16,7 @@ interface Props {
 
 export function ConfirmDialog({
   open, onOpenChange, title, description,
-  confirmText = 'Confirm', destructive, onConfirm,
+  confirmText = 'Potvrdi', destructive, onConfirm,
 }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -26,7 +26,7 @@ export function ConfirmDialog({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <DialogFooter>
-          <Button variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>
+          <Button variant="ghost" onClick={() => onOpenChange(false)}>Odustani</Button>
           <Button
             variant={destructive ? 'destructive' : 'default'}
             onClick={() => { onConfirm(); onOpenChange(false); }}

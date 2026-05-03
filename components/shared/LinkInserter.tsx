@@ -24,20 +24,20 @@ export function LinkInserter({ onInsert }: Props) {
   return (
     <div className="flex flex-wrap gap-2 items-center">
       <span className="display text-[0.6rem] tracking-[0.3em] uppercase text-gold-dim">
-        Insert link →
+        Umetni vezu →
       </span>
       <PickerSelect
-        label="NPC"
+        label="Lik"
         items={npcs.map(n => ({ id: n.id, name: n.name }))}
         onPick={(item) => handle(item.id, 'npcs', item.name)}
       />
       <PickerSelect
-        label="Hero"
+        label="Heroj"
         items={pcs.map(p => ({ id: p.id, name: p.name }))}
         onPick={(item) => handle(item.id, 'pcs', item.name)}
       />
       <PickerSelect
-        label="Location"
+        label="Lokacija"
         items={locations.map(l => ({ id: l.id, name: l.name }))}
         onPick={(item) => handle(item.id, 'locations', item.name)}
       />
@@ -67,7 +67,7 @@ function PickerSelect({
       <SelectContent>
         <SelectItem value={RESET} disabled>{label}</SelectItem>
         {items.length === 0 ? (
-          <SelectItem value="__none__" disabled>none yet</SelectItem>
+          <SelectItem value="__none__" disabled>nema</SelectItem>
         ) : (
           items.map(it => (
             <SelectItem key={it.id} value={it.id}>{it.name}</SelectItem>

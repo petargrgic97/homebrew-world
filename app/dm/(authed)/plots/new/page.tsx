@@ -10,7 +10,7 @@ export default function NewPlot() {
   const router = useRouter();
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Conspire" title="New Scheme" />
+      <PageHeader eyebrow="Snuj urotu" title="Nova spletka" />
       <PlotForm
         onSubmit={async (input) => {
           const id = await createPlot(db, input);

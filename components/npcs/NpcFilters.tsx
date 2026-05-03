@@ -1,6 +1,7 @@
 'use client';
 import { Input } from '@/components/ui/input';
 import type { Npc, NpcStatus } from '@/lib/types';
+import { npcStatusFilterLabel } from '@/lib/i18n';
 
 interface Props {
   npcs: Npc[];
@@ -44,18 +45,18 @@ export function NpcFilters({
   return (
     <div className="space-y-3 mb-6">
       <Input
-        placeholder="Search by name…"
+        placeholder="Pretraži po imenu…"
         value={query}
         onChange={e => setQuery(e.target.value)}
       />
       <div className="flex flex-wrap gap-2">
         {statuses.map(s => (
-          <Chip key={s} active={status === s} onClick={() => setStatus(s)}>{s}</Chip>
+          <Chip key={s} active={status === s} onClick={() => setStatus(s)}>{npcStatusFilterLabel[s]}</Chip>
         ))}
       </div>
       {factions.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <Chip active={faction === 'all'} onClick={() => setFaction('all')}>all roles</Chip>
+          <Chip active={faction === 'all'} onClick={() => setFaction('all')}>sve uloge</Chip>
           {factions.map(f => (
             <Chip key={f} active={faction === f} onClick={() => setFaction(f)}>{f}</Chip>
           ))}

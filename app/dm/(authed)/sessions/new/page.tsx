@@ -10,7 +10,7 @@ export default function NewSession() {
   const router = useRouter();
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Open a new chapter" title="New Session" />
+      <PageHeader eyebrow="Otvori novo poglavlje" title="Nova sesija" />
       <SessionForm
         onSubmit={async (input) => {
           const id = await createSession(db, input);

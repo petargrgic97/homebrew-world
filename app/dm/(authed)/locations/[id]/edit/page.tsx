@@ -15,11 +15,11 @@ export default function EditLocation({
   const { data: location } = useLocation(id);
   const router = useRouter();
 
-  if (!location) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!location) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-3xl mx-auto">
-      <PageHeader eyebrow="Amend the record" title="Edit Location" />
+      <PageHeader eyebrow="Izmijeni zapis" title="Uredi lokaciju" />
       <LocationForm
         initial={location}
         onSubmit={async (input) => {

@@ -25,19 +25,19 @@ export default function DMSessionsPage() {
   return (
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
       <PageHeader
-        eyebrow="Entries in the chronicle"
-        title="Sessions"
+        eyebrow="Zapisi kronike"
+        title="Sesije"
         actions={
           <Button asChild>
-            <Link href="/dm/sessions/new">+ Begin Session</Link>
+            <Link href="/dm/sessions/new">+ Započni sesiju</Link>
           </Button>
         }
       />
       {isLoading ? (
-        <div className="text-vellum-dim italic">Loading…</div>
+        <div className="text-vellum-dim italic">Učitavam…</div>
       ) : !sessions || sessions.length === 0 ? (
         <div className="text-vellum-dim italic py-12 text-center panel rounded-sm">
-          The chronicle is yet to be opened.
+          Kronika još nije otvorena.
         </div>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">

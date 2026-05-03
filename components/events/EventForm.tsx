@@ -82,7 +82,7 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="space-y-1.5">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">Naslov</Label>
         <Input
           id="title"
           value={title}
@@ -93,23 +93,23 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label htmlFor="occurredAt">In-game date</Label>
+          <Label htmlFor="occurredAt">Datum u igri</Label>
           <Input
             id="occurredAt"
             value={occurredAt}
             onChange={e => setOccurredAt(e.target.value)}
-            placeholder="e.g. 14. dan ljeta, 1421."
+            placeholder="npr. 14. dan ljeta, 1421."
           />
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label>Location</Label>
+          <Label>Lokacija</Label>
           <Select value={locationId} onValueChange={setLocationId}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              <SelectItem value={NO_LINK}>(none)</SelectItem>
+              <SelectItem value={NO_LINK}>(nijedna)</SelectItem>
               {locations.map(l => (
                 <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
               ))}
@@ -117,14 +117,14 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label>Session</Label>
+          <Label>Sesija</Label>
           <Select value={sessionId} onValueChange={setSessionId}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              <SelectItem value={NO_LINK}>(none)</SelectItem>
+              <SelectItem value={NO_LINK}>(nijedna)</SelectItem>
               {sessions.map(s => (
                 <SelectItem key={s.id} value={s.id}>
-                  Session {s.number}{s.title ? `: ${s.title}` : ''}
+                  Sesija {s.number}{s.title ? `: ${s.title}` : ''}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -133,9 +133,9 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-1.5">
-        <Label>Heroes involved (PCs)</Label>
+        <Label>Sudjelujući heroji</Label>
         {pcs.length === 0 ? (
-          <div className="text-sm text-vellum-dim italic">No party members yet.</div>
+          <div className="text-sm text-vellum-dim italic">Još nema članova družine.</div>
         ) : (
           <div className="grid sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto border border-border rounded-sm p-2 bg-ink-deep/30">
             {pcs.map(p => (
@@ -154,9 +154,9 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-1.5">
-        <Label>NPCs involved</Label>
+        <Label>Sudjelujući likovi</Label>
         {npcs.length === 0 ? (
-          <div className="text-sm text-vellum-dim italic">No NPCs to link yet.</div>
+          <div className="text-sm text-vellum-dim italic">Još nema likova za povezati.</div>
         ) : (
           <div className="grid sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto border border-border rounded-sm p-2 bg-ink-deep/30">
             {npcs.map(n => (
@@ -175,7 +175,7 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label>Description (markdown)</Label>
+        <Label>Opis (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -184,9 +184,9 @@ export function EventForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="flex gap-2">
         <Button type="submit" disabled={busy || !title}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

@@ -12,6 +12,7 @@ import { useNpcs } from '@/lib/hooks/useNpcs';
 import { usePcs } from '@/lib/hooks/usePcs';
 import { useLocations } from '@/lib/hooks/useLocations';
 import type { Plot, PlotStatus, WriteInput } from '@/lib/types';
+import { plotStatusLabel } from '@/lib/i18n';
 
 interface Props {
   initial?: Plot;
@@ -79,7 +80,7 @@ export function PlotForm({ initial, onSubmit, onCancel }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
       <div className="space-y-1.5">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">Naslov</Label>
         <Input id="title" value={title} onChange={e => setTitle(e.target.value)} required />
       </div>
 
@@ -88,43 +89,43 @@ export function PlotForm({ initial, onSubmit, onCancel }: Props) {
         <Select value={status} onValueChange={(v) => setStatus(v as PlotStatus)}>
           <SelectTrigger><SelectValue /></SelectTrigger>
           <SelectContent>
-            {statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+            {statuses.map(s => <SelectItem key={s} value={s}>{plotStatusLabel[s]}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
 
       <div className="space-y-1.5">
-        <Label>Linked Heroes (PCs)</Label>
+        <Label>Povezani heroji</Label>
         <MultiCheckList
           items={pcs.map(p => ({ id: p.id, name: p.name }))}
           selected={pcIds}
           onToggle={(id) => toggle(pcIds, setPcIds, id)}
-          emptyLabel="No party members to link yet."
+          emptyLabel="Još nema članova družine za povezati."
         />
       </div>
 
       <div className="space-y-1.5">
-        <Label>Linked NPCs</Label>
+        <Label>Povezani likovi</Label>
         <MultiCheckList
           items={npcs.map(n => ({ id: n.id, name: n.name }))}
           selected={npcIds}
           onToggle={(id) => toggle(npcIds, setNpcIds, id)}
-          emptyLabel="No NPCs to link yet."
+          emptyLabel="Još nema likova za povezati."
         />
       </div>
 
       <div className="space-y-1.5">
-        <Label>Linked Locations</Label>
+        <Label>Povezane lokacije</Label>
         <MultiCheckList
           items={locations.map(l => ({ id: l.id, name: l.name }))}
           selected={locationIds}
           onToggle={(id) => toggle(locationIds, setLocationIds, id)}
-          emptyLabel="No locations to link yet."
+          emptyLabel="Još nema lokacija za povezati."
         />
       </div>
 
       <div className="space-y-2">
-        <Label>Description (markdown)</Label>
+        <Label>Opis (markdown)</Label>
         <LinkInserter
           onInsert={(md) => setDescription(prev => (prev ? `${prev} ${md}` : md))}
         />
@@ -133,9 +134,9 @@ export function PlotForm({ initial, onSubmit, onCancel }: Props) {
 
       <div className="flex gap-2">
         <Button type="submit" disabled={busy || !title}>
-          {busy ? 'Saving…' : 'Save'}
+          {busy ? 'Spremam…' : 'Spremi'}
         </Button>
-        <Button type="button" variant="ghost" onClick={onCancel}>Cancel</Button>
+        <Button type="button" variant="ghost" onClick={onCancel}>Odustani</Button>
       </div>
     </form>
   );

@@ -32,7 +32,7 @@ export function NpcLocationGroups({
   ];
 
   if (orderedLocationIds.length === 0) {
-    return <div className="text-vellum-dim italic">No NPCs match.</div>;
+    return <div className="text-vellum-dim italic">Nema podudaranja.</div>;
   }
 
   return (
@@ -52,7 +52,7 @@ export function NpcLocationGroups({
                 </Link>
               ) : (
                 <span className="display text-sm tracking-[0.25em] uppercase text-vellum-dim">
-                  unattached
+                  bez lokacije
                 </span>
               )}
               <span className="h-px flex-1 bg-gold-dim/30" />

@@ -22,7 +22,7 @@ export function ImageUpload({ folder, initialUrl, onUploaded }: Props) {
       setUrl(newUrl);
       onUploaded(newUrl);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Upload failed');
+      setError(e instanceof Error ? e.message : 'Učitavanje nije uspjelo');
     } finally {
       setBusy(false);
     }
@@ -39,7 +39,7 @@ export function ImageUpload({ folder, initialUrl, onUploaded }: Props) {
         disabled={busy}
         onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])}
       />
-      {busy && <div className="text-sm text-slate-500">Uploading…</div>}
+      {busy && <div className="text-sm text-slate-500">Učitavam…</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
     </div>
   );

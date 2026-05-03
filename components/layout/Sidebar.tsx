@@ -4,22 +4,22 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth/useAuth';
 
 const playerLinks = [
-  { href: '/', label: 'Cover' },
-  { href: '/pcs', label: 'Party' },
-  { href: '/locations', label: 'Locations' },
-  { href: '/npcs', label: 'Personae' },
-  { href: '/sessions', label: 'Chronicle' },
-  { href: '/map', label: 'Map' },
+  { href: '/', label: 'Naslovnica' },
+  { href: '/pcs', label: 'Družina' },
+  { href: '/locations', label: 'Lokacije' },
+  { href: '/npcs', label: 'Likovi' },
+  { href: '/sessions', label: 'Kronika' },
+  { href: '/map', label: 'Karta' },
 ];
 
 const dmLinks = [
-  { href: '/dm', label: 'Cover' },
-  { href: '/dm/pcs', label: 'Party' },
-  { href: '/dm/locations', label: 'Locations' },
-  { href: '/dm/npcs', label: 'Personae' },
-  { href: '/dm/sessions', label: 'Chronicle' },
-  { href: '/dm/plots', label: 'Schemes' },
-  { href: '/dm/map', label: 'Map' },
+  { href: '/dm', label: 'Naslovnica' },
+  { href: '/dm/pcs', label: 'Družina' },
+  { href: '/dm/locations', label: 'Lokacije' },
+  { href: '/dm/npcs', label: 'Likovi' },
+  { href: '/dm/sessions', label: 'Kronika' },
+  { href: '/dm/plots', label: 'Spletke' },
+  { href: '/dm/map', label: 'Karta' },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -40,13 +40,13 @@ export function Sidebar() {
       <div className="px-6 pt-7 pb-5 border-b border-border">
         <Link href={inDmArea ? '/dm' : '/'} className="block group">
           <div className="text-[0.6rem] tracking-[0.45em] uppercase text-gold-dim display">
-            {inDmArea ? "Dungeon Master's" : 'Players’'}
+            {inDmArea ? 'Tom mastera' : 'Tom družine'}
           </div>
           <div className="display-decorative font-bold text-lg mt-1 leading-tight text-gold">
             Homebrew World
           </div>
           <div className="text-[0.65rem] italic text-vellum-dim mt-1 tracking-wide">
-            a chronicle
+            kronika
           </div>
         </Link>
       </div>
@@ -68,7 +68,7 @@ export function Sidebar() {
           href="/dm"
           className="mx-4 mb-4 px-3 py-2 text-center text-[0.65rem] tracking-[0.35em] uppercase display border border-gold-dim/40 text-gold hover:bg-gold/5 transition-colors rounded-sm"
         >
-          enter the keep
+          uđi u utvrdu
         </Link>
       )}
     </aside>

@@ -13,7 +13,7 @@ export function MapDisplay({
       <div className="relative overflow-hidden rounded-sm ring-1 ring-gold-dim/30">
         <Image
           src={map.imageUrl}
-          alt={map.caption ?? 'World map'}
+          alt={map.caption ?? 'Karta svijeta'}
           width={1600}
           height={1000}
           className="w-full h-auto"

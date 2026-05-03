@@ -27,10 +27,10 @@ export function DMHeader() {
             href="/"
             className="display text-[0.6rem] tracking-[0.3em] uppercase text-vellum-dim hover:text-gold transition-colors"
           >
-            view as player
+            pregled za igrače
           </Link>
           <Button size="sm" variant="ghost" onClick={() => signOut(auth)} className="display text-[0.6rem] tracking-[0.3em] uppercase">
-            sign out
+            odjava
           </Button>
         </div>
       </div>

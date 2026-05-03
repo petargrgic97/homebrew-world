@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button';
 import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { deleteNpc } from '@/lib/firestore/npcs';
 import { db } from '@/lib/firebase';
+import { npcStatusLabel } from '@/lib/i18n';
 
 const statusStyle: Record<string, string> = {
   alive: 'text-emerald-300/90',
@@ -32,7 +33,7 @@ export default function DMNpcDetail({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
-  if (!npc) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!npc) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   async function handleDelete() {
     await deleteNpc(db, id);
@@ -63,13 +64,13 @@ export default function DMNpcDetail({
             </div>
             <div className="flex-1 space-y-2 min-w-0">
               <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-                ✦ a soul of note ✦
+                ✦ lik vrijedan spomena ✦
               </div>
               <h1 className="display-decorative text-3xl md:text-4xl text-gold leading-tight">
                 {npc.name}
               </h1>
               <div className="flex flex-wrap items-center gap-2">
-                <span className={`seal ${statusStyle[npc.status] ?? 'text-vellum-dim'}`}>{npc.status}</span>
+                <span className={`seal ${statusStyle[npc.status] ?? 'text-vellum-dim'}`}>{npcStatusLabel[npc.status]}</span>
                 {npc.faction && (
                   <span className="display text-[0.65rem] tracking-[0.3em] uppercase text-vellum-dim italic">
                     {npc.faction}
@@ -88,10 +89,10 @@ export default function DMNpcDetail({
           </div>
           <div className="flex gap-2 shrink-0">
             <Button asChild variant="outline">
-              <Link href={`/dm/npcs/${id}/edit`}>Edit</Link>
+              <Link href={`/dm/npcs/${id}/edit`}>Uredi</Link>
             </Button>
             <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-              Delete
+              Obriši
             </Button>
           </div>
         </div>
@@ -102,27 +103,27 @@ export default function DMNpcDetail({
       <section>
         <div className="flex items-center justify-between mb-4 gap-3">
           <h2 className="section-title flex items-center gap-3 flex-1">
-            <span>Where They Appear</span>
+            <span>Gdje se pojavljuje</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/dm/events/new?npcId=${id}`}>+ Add event</Link>
+            <Link href={`/dm/events/new?npcId=${id}`}>+ Dodaj događaj</Link>
           </Button>
         </div>
         {events && events.length > 0 ? (
           <EventTimeline events={events} dmEditable />
         ) : (
-          <div className="text-sm text-vellum-dim italic">No events involve this NPC yet.</div>
+          <div className="text-sm text-vellum-dim italic">Ovaj lik još nije povezan ni s jednim događajem.</div>
         )}
       </section>
 
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Delete NPC?"
-        description="This cannot be undone."
+        title="Obrisati lika?"
+        description="Ovo se ne može poništiti."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={handleDelete}
       />
     </article>

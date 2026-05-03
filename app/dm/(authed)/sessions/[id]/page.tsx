@@ -22,7 +22,7 @@ export default function DMSessionDetail({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
 
-  if (!session) return <div className="p-10 text-vellum-dim italic">Loading…</div>;
+  if (!session) return <div className="p-10 text-vellum-dim italic">Učitavam…</div>;
 
   async function handleDelete() {
     await deleteSession(db, id);
@@ -36,18 +36,18 @@ export default function DMSessionDetail({
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="display text-[0.65rem] tracking-[0.5em] uppercase text-gold-dim">
-              ✦ session {session.number}{session.date ? ` · ${session.date}` : ''} ✦
+              ✦ sesija {session.number}{session.date ? ` · ${session.date}` : ''} ✦
             </div>
             <h1 className="display-decorative text-3xl md:text-4xl text-gold leading-tight mt-1">
-              {session.title || `Session ${session.number}`}
+              {session.title || `Sesija ${session.number}`}
             </h1>
           </div>
           <div className="flex gap-2 shrink-0">
             <Button asChild variant="outline">
-              <Link href={`/dm/sessions/${id}/edit`}>Edit</Link>
+              <Link href={`/dm/sessions/${id}/edit`}>Uredi</Link>
             </Button>
             <Button variant="destructive" onClick={() => setConfirmOpen(true)}>
-              Delete
+              Obriši
             </Button>
           </div>
         </div>
@@ -59,27 +59,27 @@ export default function DMSessionDetail({
       <section>
         <div className="flex items-center justify-between mb-4 gap-3">
           <h2 className="section-title flex items-center gap-3 flex-1">
-            <span>Events of Note</span>
+            <span>Značajni događaji</span>
             <span className="h-px flex-1 bg-gold-dim/30" />
           </h2>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/dm/events/new?sessionId=${id}`}>+ Add event</Link>
+            <Link href={`/dm/events/new?sessionId=${id}`}>+ Dodaj događaj</Link>
           </Button>
         </div>
         {events && events.length > 0 ? (
           <EventTimeline events={events} dmEditable />
         ) : (
-          <div className="text-sm text-vellum-dim italic">No events tagged to this session.</div>
+          <div className="text-sm text-vellum-dim italic">Nema događaja vezanih uz ovu sesiju.</div>
         )}
       </section>
 
       <ConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
-        title="Delete session?"
-        description="This cannot be undone. Events tagged to this session will be unlinked but not deleted."
+        title="Obrisati sesiju?"
+        description="Ovo se ne može poništiti. Događaji vezani uz ovu sesiju bit će odvojeni, ali ne i obrisani."
         destructive
-        confirmText="Delete"
+        confirmText="Obriši"
         onConfirm={handleDelete}
       />
     </article>
