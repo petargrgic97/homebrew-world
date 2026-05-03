@@ -2,14 +2,16 @@
 import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import { useNpcs } from '@/lib/hooks/useNpcs';
-import { NpcCard } from '@/components/npcs/NpcCard';
+import { useLocations } from '@/lib/hooks/useLocations';
 import { NpcFilters } from '@/components/npcs/NpcFilters';
+import { NpcLocationGroups } from '@/components/npcs/NpcLocationGroups';
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/PageHeader';
 import type { NpcStatus } from '@/lib/types';
 
 export default function DMNpcsPage() {
   const { data: npcs = [], isLoading } = useNpcs();
+  const { data: locations = [] } = useLocations();
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState<NpcStatus | 'all'>('all');
   const [faction, setFaction] = useState<string | 'all'>('all');
@@ -50,9 +52,12 @@ export default function DMNpcsPage() {
             status={status} setStatus={setStatus}
             faction={faction} setFaction={setFaction}
           />
-          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map(n => <NpcCard key={n.id} npc={n} basePath="/dm/npcs" />)}
-          </div>
+          <NpcLocationGroups
+            npcs={filtered}
+            locations={locations}
+            basePath="/dm/npcs"
+            locationBasePath="/dm/locations"
+          />
         </>
       )}
     </div>
