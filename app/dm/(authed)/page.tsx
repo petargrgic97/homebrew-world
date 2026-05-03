@@ -18,6 +18,7 @@ export default function DMHome() {
   const { data: pcs = [] } = usePcs();
   const { data: plots = [] } = usePlots();
   const activePlots = plots.filter(p => p.status === 'active');
+  const latestSession = sessions[sessions.length - 1];
 
   return (
     <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
@@ -69,18 +70,18 @@ export default function DMHome() {
         </section>
       )}
 
-      {sessions[0] && (
+      {latestSession && (
         <section>
           <SectionHeading eyebrow="Last entry" title="Most Recent Session" />
           <Link
-            href={`/dm/sessions/${sessions[0].id}`}
+            href={`/dm/sessions/${latestSession.id}`}
             className="card-hover panel rounded-sm p-6 block"
           >
             <div className="display text-[0.65rem] tracking-[0.4em] uppercase text-gold-dim mb-2">
-              Session {sessions[0].number}{sessions[0].date ? ` · ${sessions[0].date}` : ''}
+              Session {latestSession.number}{latestSession.date ? ` · ${latestSession.date}` : ''}
             </div>
             <h3 className="display-decorative text-2xl text-gold leading-tight">
-              {sessions[0].title || `Session ${sessions[0].number}`}
+              {latestSession.title || `Session ${latestSession.number}`}
             </h3>
           </Link>
         </section>

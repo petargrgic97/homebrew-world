@@ -14,7 +14,8 @@ export default function Home() {
   const { data: locations = [] } = useLocations();
   const { data: npcs = [] } = useNpcs();
   const { data: pcs = [] } = usePcs();
-  const latest = sessions[0];
+  const sessionsByNewest = [...sessions].reverse();
+  const latest = sessionsByNewest[0];
 
   return (
     <div className="px-6 md:px-10 py-12 max-w-5xl mx-auto">
@@ -78,11 +79,11 @@ export default function Home() {
         </section>
       )}
 
-      {sessions.length > 1 && (
+      {sessionsByNewest.length > 1 && (
         <section className="mb-14">
           <SectionHeading eyebrow="Earlier" title="Previous Sessions" />
           <div className="grid gap-3 sm:grid-cols-2">
-            {sessions.slice(1, 5).map(s => (
+            {sessionsByNewest.slice(1, 5).map(s => (
               <Link
                 key={s.id}
                 href={`/sessions/${s.id}`}
