@@ -72,7 +72,7 @@ export default function DMNpcDetail({
                 <span className={`seal ${statusStyle[npc.status] ?? 'text-vellum-dim'}`}>{npc.status}</span>
                 {npc.faction && (
                   <span className="display text-[0.65rem] tracking-[0.3em] uppercase text-vellum-dim italic">
-                    of the {npc.faction}
+                    {npc.faction}
                   </span>
                 )}
               </div>

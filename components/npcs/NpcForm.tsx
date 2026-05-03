@@ -66,12 +66,12 @@ export function NpcForm({ initial, onSubmit, onCancel }: Props) {
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="faction">Faction / role</Label>
+          <Label htmlFor="faction">Role</Label>
           <Input
             id="faction"
             value={faction}
             onChange={e => setFaction(e.target.value)}
-            placeholder="e.g. Lord's household"
+            placeholder="e.g. fisherman, housekeeper"
           />
         </div>
       </div>

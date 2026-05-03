@@ -55,7 +55,7 @@ export function NpcFilters({
       </div>
       {factions.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <Chip active={faction === 'all'} onClick={() => setFaction('all')}>all factions</Chip>
+          <Chip active={faction === 'all'} onClick={() => setFaction('all')}>all roles</Chip>
           {factions.map(f => (
             <Chip key={f} active={faction === f} onClick={() => setFaction(f)}>{f}</Chip>
           ))}
