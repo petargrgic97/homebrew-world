@@ -73,7 +73,7 @@
   --vellum-dim: oklch(0.72 0.024 80);
   --gold: oklch(0.76 0.105 82);
   --gold-bright: oklch(0.88 0.13 84);
-  --gold-dim: oklch(0.50 0.06 80);
+  --gold-dim: oklch(0.64 0.07 82);
   --blood: oklch(0.46 0.135 25);
   --blood-bright: oklch(0.56 0.165 25);
 
@@ -194,6 +194,7 @@
 
   .display {
     font-family: var(--font-display, ui-serif, Georgia, serif);
+    font-weight: 500;
     letter-spacing: 0.04em;
   }
   .display-decorative {
